@@ -7,3 +7,16 @@ body{
     background-color: #222222;
     color: #eeeeee;
 }
+
+header a{
+    margin: 5px;
+    padding: 10px;
+    color: #eeeeee;
+    text-decoration: none;
+    border: 2px groove #eeeeee;
+    border-radius: 15px;
+}
+
+header a:hover{
+    background-color: #202020AA;
+}
