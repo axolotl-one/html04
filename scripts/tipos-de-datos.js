@@ -18,10 +18,10 @@ salida.textContent += mensaje;
 
 //hardcoding
 let nulo = null;
-console.log("Este es un valor nulo:" + nulo);
+console.log("Este es un valor nulo: " + nulo);
 let inasignado;
 console.log("Este es un valor sin asignar: " + inasignado);
 let booleano = true;
-console.log("Este es un valor booleano:" + booleano);
+console.log("Este es un valor booleano: " + booleano);
 let scape = "\"";
-console.log("Este es un valor de escape de caracter de sintaxis" + scape);
+console.log("Este es un valor de escape de caracter de sintaxis: " + scape);
