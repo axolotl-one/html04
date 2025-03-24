@@ -2,18 +2,18 @@ let mensaje;
 let salida = document.getElementById("captura");
 let temax = document.getElementById("tema");
 temax.textContent = "Practica 2: Estructuras de Selección de Java Script";
-let nota = parseInt(window.prompt());
+let nota = parseInt(window.prompt("Ingresa tu calificación:"));
 
 //Selección de if-else
 if(isNaN(nota)){
     console.log("El valor ingresado no es un número.");
     salida.textContent = "El valor ingresado no es un número";
 }else if(nota<0 || nota > 100){
-    console.log("La nota no se encuentra dentro del rango");
-    salida.textContent = "La nota no se encuentra dentro del rango";
+    console.log("La nota " + nota + " se encuentra fuera del rango");
+    salida.textContent = "La nota " + nota + " se encuentra fuera del rango";
 }else if(nota<60){
-    console.log("La nota es: \"Insuficiente\"");
-    salida.textContent = "La nota es: \"Insuficiente\"";
+    console.log("La nota " + nota + " es: \"Insuficiente\"");
+    salida.textContent = "La nota " + nota + " es: \"Insuficiente\"";
 }else if(nota<75){
     console.log("La nota es: \"Suficiente\"");
     salida.textContent = "La nota es: \"Suficiente\"";
@@ -24,6 +24,6 @@ if(isNaN(nota)){
     console.log("La nota es: \"Excelente\"");
     salida.textContent = "La nota es: \"Excelente\"";
 }else{
-    console.log("La nota es: \"Máxima\"");
-    salida.textContent = "La nota es: \"Máxima\"";
+    console.log("La nota " + nota + " es: \"Máxima\"");
+    salida.textContent = "La nota " + nota + " es: \"Máxima\"";
 }
