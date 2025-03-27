@@ -1,0 +1,32 @@
+header, main, footer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 5vh;
+}
+
+main div img{
+    width: 40vw;
+    height: 40wv;
+}
+
+button{
+    padding: 15px;
+    border-radius: 20px;
+    font-size: 25px;
+    color: #eeeeee;
+    border-color: #eeeeee;
+    background-color: #222222;
+    font-weight: bold;
+}
+
+@media screen and (min-width: 550px){
+    main div img{
+        width: 250px;
+        height: 250px;
+    }
+
+    header, main, footer{
+        margin: 2vh 0px;
+    }
+}
