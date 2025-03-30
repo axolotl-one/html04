@@ -8,25 +8,50 @@
     <title>Piedra Papel o Tijeras Menos Una</title>
 </head>
 <body>
+    <h1>Piedra Papel o Tijeras menos una</h1>
     <header>
-        <h1>Piedra Papel o Tijeras menos una</h1>
-        <div>
+        <span id="elementsUser">
+            <button id="activarPiedra"></button>
+            <button id="activarPapel"></button>
+            <button id="activarTijeras"></button>
+        </span>
+        <span id="elementsComputer">
             <button id="activarJuego">Iniciart</button>
             <button id="activarMenos1">Menos Una</button>
-        </div>
-        <script src="../scripts/clase/PPTTirar.js"></script>
+        </span>
+        <nav>
+            <input type="checkbox" id="inputConfig">
+            <label for="inputConfig" id="labelconfig"><img src="../assets/settings.png" alt="Config"></label>
+            <ul id="listaConfig">
+                <li><label for="modePlayer">Modo de Jugador:</label></li>
+                <li><label for="modeUser"><input type="radio" name="modePlayer" id="modeUser" value="user" checked>Jugador contra Computadora</label></li>
+                <li><label for="modeComputer"><input type="radio" name="modePlayer" id="modeComputer" value="computer">Computadora contra Computadora</label></li>
+                <li><label for="skillLevel">Nivel de Habilidad:</label></li>
+                <li><label for="modeNormal"><input type="radio" name="skillLevel" id="modeNormal" value="normal" checked>Normal</label></li>
+                <li><label for="modeBrutal"><input type="radio" name="skillLevel" id="modeBrutal" value="brutal">Brutal</label></li>
+                <li><label for="modeGame">Modo de Juego:</label></li>
+                <li><label for="modeFriendly"><input type="radio" name="modeGame" id="modeFriendly" value="amistoso" checked>Amistoso</label></li>
+                <li><label for="modeHardcore"><input type="radio" name="modeGame" id="modeHardcore" value="hardcore">Hardcore</label></li>
+                <li><label for="statusMenos1Before"><input type="radio" id="statusMenos1Before" disabled></label></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <section id="izq">
             <h3>Jugador 1</h3>
-            <div id="mano1Jugador1"></div>
-            <div id="mano2Jugador1"></div>
+            <div id="puntosJugador1"></div>
+            <div id="mano1Jugador1" class="manosLanzadas"></div>
+            <div id="mano2Jugador1" class="manosLanzadas"></div>
         </section>
         <section id="der">
             <h3>Jugador 2</h3>
-            <div id="mano1Jugador2"></div>
-            <div id="mano2Jugador2"></div>
+            <div id="puntosJugador2"></div>
+            <div id="mano1Jugador2" class="manosLanzadas"></div>
+            <div id="mano2Jugador2" class="manosLanzadas"></div>
         </section>
+        <div id="mensaje"></div>
     </main>
+    
+    <script src="../scripts/clase/PPTDebug.js"></script>
 </body>
 </html>

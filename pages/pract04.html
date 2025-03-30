@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/practics.css">
+    <link rel="stylesheet" href="../styles/pract04.css">
+    <title>Colección de Libros</title>
+</head>
+<body>
+    <header>
+        <h1>Colección de Libros</h1>
+        <nav>
+            <input class="NuevoLibro" id="titulo" type="text" placeholder="Ingresar Titulo">
+            <select name="Seleccionar" id="generos">
+                <option value="others">General</option>
+                <option value="science">Ciencias</option>
+                <option value="fiction">Ciencia Ficción</option>
+                <option value="law">Derecho</option>
+                <option value="didactic">Didácticos</option>
+                <option value="fairytale">Ficticios</option>
+                <option value="code">Informática</option>
+                <option value="maths">Matemáticas</option>
+                <option value="romance">Romance</option>
+            </select>
+            <input id="capturarLibro" type="submit" value="Agregar Libro">
+            <button id="mostrarLista">Mostrar Lista</button>
+        </nav>
+    </header>
+    <main id="librosRegistrados">
+        <script src="../scripts/campus/array-libros.js"></script>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>

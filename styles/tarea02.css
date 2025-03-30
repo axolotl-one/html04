@@ -1,19 +1,108 @@
+*{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1{
+    text-align: center;
+}
+
+nav ul {
+    position: fixed;
+    list-style: none;
+/*     display: none;*/
+    width: 50vw;
+    padding: 0;
+    bottom: calc(50vw + 5px);
+    right: -320px;
+    transition: all 1s;
+}
+
+nav li {
+    border: 1px solid #eeeeee;
+    background-color: #222222;
+    margin: 0;
+}
+
+nav li:hover {
+    background: #333333;
+}
+
+nav li label {
+    display: block;
+    padding: 10px 15px;
+    color: darkorange;
+}
+
+#inputConfig{    /*Elimina el cuadro de Checkbox, Aun se habilita con la imagen*/
+    display: none;
+}
+
+nav label img{
+    width: 20vw;
+    height: 20vw;
+    position: fixed;
+    right: 0;
+    bottom: calc(30vw + 5px);
+}
+
+#inputConfig:checked ~ #listaConfig{  /*~Hace cambios en el Hermano #listaConfig al hacer checked*/
+    /*display: block;*/
+    right: 0;
+}
+
 header{
-    display: flex;
-    flex-direction: column-reverse;
+    display: inline-block;
+    padding: 4px 0px;
+    text-align: center;
     position: fixed;
     bottom: 0;
-    align-items:  center;
-    padding: 4px 0px;
-    height: 25vw;
     width: 100%;
-    gap: 10px;
 }
 
 header button{
-    width: 45vw;
+    width: 35vw;
     height: 50px;
     font-size: 20px;
+}
+
+#elementsComputer{
+    width: 35%;
+    display: none;
+}
+
+#elementsUser button{
+    width: 30vw;
+    height: 30vw;
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#activarPiedra{
+    background-image: url("../assets/manos/rock.png");
+}
+
+#activarPapel{
+    background-image: url("../assets/manos/paper.png");
+}
+
+#activarTijeras{
+    background-image: url("../assets/manos/scissors.png");
+}
+
+#mensaje{
+    display: inline-block;
+    width: 250px;
+    height: 100px;
+    background-color: #333333DD;
+    position: fixed;
+    left: calc(50%-100px);
+    display: none;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 10;
 }
 
 main{
@@ -34,11 +123,9 @@ main section div img{
     height: 35vw;
 }
 
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 720px) {
     header{
-        position: static;
-        flex-direction: column;
-        height: auto;
+        width: 100%;
     }
 
     header button{
@@ -50,5 +137,23 @@ main section div img{
         height: 30vh;
     }
 
+    nav ul{
+        width: 300px;
+        bottom: 85px;
+    }
 
+    nav ul li label{
+        padding: 15px;
+    }
+
+    nav label img{
+        width: 80px;
+        height: 80px;
+        bottom: 0;
+    }
+
+    #elementsUser button{
+        width: 180px;
+        height: 180px;
+    }
 }

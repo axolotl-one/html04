@@ -1,0 +1,81 @@
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 5vh;
+}
+
+header{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+nav{
+    position: fixed;
+    bottom: 0;
+}
+
+main div img{
+    width: 40vw;
+    height: 40vw;
+}
+
+main div image, main div i{
+    display: block;
+    text-align: center;
+    font-size: 20px;
+}
+
+button, input, select{
+    padding: 15px;
+    border-radius: 20px;
+    font-size: 25px;
+    color: #eeeeee;
+    border-color: #eeeeee;
+    background-color: #222222;
+    font-weight: bold;
+}
+
+#capturarLibro, #generos{
+    width: 45%;
+}
+
+#titulo, #mostrarLista{
+    width: 90%;
+}
+
+i{
+    width: 40vw;
+}
+
+footer{
+    margin-bottom: 200px;
+}
+
+@media screen and (min-width: 650px){
+    main div img{
+        width: 250px;
+        height: 250px;
+    }
+
+    i{
+        width: 250px;
+    }
+
+    nav{
+        position: static;
+    }
+
+    main{
+        margin: 2vh 0px;
+    }
+
+    #capturarLibro, #generos, #mostrarLista{
+        width: 30%;
+    }
+
+    footer{
+        margin: 0;
+    }
+}
