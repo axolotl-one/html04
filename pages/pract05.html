@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/practics.css">
+    <link rel="stylesheet" href="../styles/pract04-05.css">
+    <title>Colección de Libros</title>
+</head>
+<body>
+    <header>
+        <h1>Colección de Libros</h1>
+        <nav>
+            <input class="gridDoble" id="titulo" type="text" placeholder="Escribe el Título">
+            <input class="gridDoble" id="autor" type="text" placeholder="Escribe el Autor">
+            <input class="opciones" id="anio" type="number" placeholder="Escribe el Año">
+            <select class="opciones" name="Seleccionar" id="estado">
+                <option value="disponible">Disponible</option>
+                <option value="prestado">Prestado</option>
+            </select>
+            <select class="opciones" name="Seleccionar" id="generos">
+                <option value="others">General</option>
+                <option value="science">Ciencias</option>
+                <option value="fiction">Ciencia Ficción</option>
+                <option value="law">Derecho</option>
+                <option value="didactic">Didácticos</option>
+                <option value="fairytale">Ficticios</option>
+                <option value="code">Informática</option>
+                <option value="maths">Matemáticas</option>
+                <option value="romance">Romance</option>
+            </select>
+            <select class="opciones" name="Seleccionar" id="editorial">
+                <option value="anonimo">Anonimo</option>
+                <option value="planeta">Planeta</option>
+                <option value="pearson">Pearson</option>
+            </select>
+            <input class="opciones" id="capturarObjetoClase" type="submit" value="Agregar Libro Clase">
+            <input class="opciones" id="capturarObjetoLiteral" type="submit" value="Agregar Libro Literal">
+            <input class="opciones" id="capturarObjetoConstructor" type="submit" value="Agregar Libro Constructor">
+            <button class="opciones" id="mostrarLista">Mostrar Lista</button>
+        </nav>
+    </header>
+    <main id="librosRegistrados">
+        <script src="../scripts/campus/object-libro.js"></script>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>

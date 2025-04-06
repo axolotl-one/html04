@@ -21,3 +21,14 @@ header a{
 header a:hover{
     background-color: #202020AA;
 }
+
+footer{
+    width: 100%;
+    position: fixed;
+    bottom: 2vh;
+}
+
+footer h5{
+    position: static;
+    text-align: center;
+}
