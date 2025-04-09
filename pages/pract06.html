@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iceland&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/practics.css">
+    <link rel="stylesheet" href="../styles/pract06.css">
+    <title>Mixtapetube</title>
+</head>
+<body>
+    <header>
+        <h1>Mixtapetube</h1>
+    </header>
+    <main>
+        <section>
+            <span class="containerVideo">
+                <video class="media" src="../assets/media/xbox3D.mp4" poster="../assets/media/xboxPost.png" controls loop>Xbox</video>
+            </span>
+            <span class="containerVideoInfo">
+                <fieldset>
+                    <legend>Xbox: Replica en Geogebra</legend>
+                    <details>
+                        <summary>Ver descripción</summary>
+                        <p>Fecha de carga: 20 de noviembre de 2023 | <i>Del desarrollador</i></p>
+                        <p>Resultados del diseño de una consola de xbox en Geogebra 3D</p>
+                    </details>
+                </fieldset>
+                <fieldset>
+                    <legend>Califica el vídeo</legend>
+                    <input type="text" class="inputComentar" id="getComentV1" placeholder="Escribe un comentario" autocomplete="off">
+                    <input type="submit" id="setComentV01" value="Enviar">
+                </fieldset>
+                <fieldset id="cajaVideo1" class="cajasComentarios">
+                    <legend>Caja de Comentarios</legend>
+                    <h4>Se el primero en comentar este video...!</h4>
+                </fieldset>
+            </span>
+        </section>
+        <section>
+            <span class="containerVideo">
+                <iframe class="media" src="https://www.youtube-nocookie.com/embed/Pswz6p3-0og?si=7NaIu-AnfNG73cRn" title="YouTube video player"
+                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </span>
+            <span class="containerVideoInfo">
+                <fieldset>
+                    <legend>¿Por qué todos odian JavaScript?</legend>
+                    <details>
+                        <summary>Ver descripción</summary>
+                        <p>Fecha de carga: 18 de marzo de 2025 | <i>Del canal de YT Programación y más</i></p>
+                        <p>Hoy veremos por qué JavaScript es tan odiado como amado por los programadores.
+                            Motivos por los que deberías aprender JavaScript.
+                            Un vistazo a su lado bueno, y su lado malo.</p>
+                    </details>
+                </fieldset>
+                <fieldset>
+                    <legend>Califica el vídeo</legend>
+                    <input type="text" class="inputComentar" id="getComentV2" placeholder="Escribe un comentario" autocomplete="off">
+                    <input type="submit" id="setComentV02" value="Enviar">
+                </fieldset>
+                <fieldset id="cajaVideo2" class="cajasComentarios">
+                    <legend>Caja de Comentarios</legend>
+                    <h4>Se el primero en comentar este video...!</h4>
+                </fieldset>
+            </span>
+        </section>
+    </main>
+    <footer>
+        <h1>Mixtapetube</h1>
+    </footer>
+    <script src="../scripts/campus/pract06.js"></script>
+</body>
+</html>

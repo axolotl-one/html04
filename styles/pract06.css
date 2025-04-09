@@ -1,0 +1,75 @@
+.iceland-regular {
+    font-family: "Iceland", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+*:not(small) {
+    font-family: "Iceland", sans-serif;
+    font-size: x-large;
+}
+
+h1{
+    text-align: center;
+    font-size: 44px;
+    padding: 10px 0;
+}
+
+.containerVideo{
+    position: relative;
+    width: 100%;              /* Proporción 16:9  (16 = 100)*/
+    padding-bottom: 56.25%;   /* Proporción 16:9 (9 = 56.25) */
+    height: 0;                /* Sustituye el espacio del container por padding */
+    overflow: hidden;         /* Corta el contenido sobrante del contenedor */
+}
+
+.media{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.containerVideoInfo{
+    width: 100%;
+    height: 56vw;
+    overflow: auto; /* Scroll cuando revasa el limite del contenedor */
+}
+
+main section{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+legend, p{
+    padding: 5px;
+}
+
+input{
+    background-color: transparent;
+    border-color: #eee;
+    color: #eee;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.inputComentar{
+    width: 75%;
+}
+
+@media screen and (min-width: 700px) {
+    main section{
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 2%
+    }
+    
+    .containerVideo{
+        width: 48%;
+        padding-bottom: 27%;
+    }
+
+    .containerVideoInfo{
+        width: 48%;
+        height: 27vw;
+    }
+}

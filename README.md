@@ -39,3 +39,13 @@ Muestra una página mejorada del _pract04.html_ con nuevos valores para registra
 ### 10.2 Incorporación del grid a hoja de estilos
 
 Cambio del display: inline-block a grid en el nav de _pract04-05.css_ y prueba de kill a estilos nativos de safari y firefox sobre los elementos de select e input.
+
+### 11.1 Actividad 6: DOM para caja de comentarios
+
+**En HTML** Se implementaron inputs de tipo text para ingresar comentarios por parte del usuario, input tipo submit para capturar los comentarios en el JS y un fieldset donde se mostraran los comentarios junto con otro nuevo input para borrar el comentario al que corresponde.
+
+**En CSS** Se uso una fuente de texto de google fonts "Iceland" que fue aplicada para todos los elementos de la página. Se aplicó el enfoque Mobile-First con una proporción 16:9 para los videos con padding-botton, height y position. para el panel del video se aplico de manera similar con height usando la unidad vw. Para pantallas mayores a 700px se cambio el display de las section del main y se dividió la proporcion entre dos para alinear horizontalmente el video con su panel correspondiente.
+
+**En JavaScript** Se creó la clase GetComentario de la cual se creo un objeto obtener comentario que guarda el contenido, un id generico de referencia para el parrafo del comentario y el boton de borrar que corresponde. Se uso un querySelectorAll para englobar a todos fieldset con la clase cajaComentarios que activen el evento click cuando se da click en algun boton de borrar comentario.
+
+**Cambios externos** La eliminación de estilos nativos de safari y firefox sobre los elementos de select e input fue aplicada en la hoja de estilos _"practics.css"._ Ahora aplican para todas las páginas "practica" del repo.

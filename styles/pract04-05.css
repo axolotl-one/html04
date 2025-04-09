@@ -53,12 +53,6 @@ footer{
     margin-bottom: 320px;
 }
 
-input, select{
-    -webkit-appearance: none; /* Nativo de Safari kick */
-    -moz-appearance: none; /* Nativo de Firefox kick */
-    appearance: none;
-}
-
 @media screen and (min-width: 650px){
     main div img{
         width: 250px;

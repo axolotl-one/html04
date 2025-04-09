@@ -7,3 +7,9 @@ body{
     background-color: #222222;
     color: #eeeeee;
 }
+
+input, select{
+    -webkit-appearance: none; /* Nativo de Safari kick */
+    -moz-appearance: none; /* Nativo de Firefox kick */
+    appearance: none;
+}
