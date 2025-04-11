@@ -49,3 +49,11 @@ Cambio del display: inline-block a grid en el nav de _pract04-05.css_ y prueba d
 **En JavaScript** Se creó la clase GetComentario de la cual se creo un objeto obtener comentario que guarda el contenido, un id generico de referencia para el parrafo del comentario y el boton de borrar que corresponde. Se uso un querySelectorAll para englobar a todos fieldset con la clase cajaComentarios que activen el evento click cuando se da click en algun boton de borrar comentario.
 
 **Cambios externos** La eliminación de estilos nativos de safari y firefox sobre los elementos de select e input fue aplicada en la hoja de estilos _"practics.css"._ Ahora aplican para todas las páginas "practica" del repo.
+
+### 12.1 Actividad 7: DOM para Generador de Passwords
+
+**En HTML** Se asignaron dos etiquetas de _fieldset_ en el _main._ La primera agrupa una etiqueta _p_ para el párrafo que capturará el password generado, y una etiqueta _input_ de tipo _submit_ para guardar el password en el portapapeles; La segunda agrupa todos los criterios que el usuario pueda definir para generar el password, en su mayoría _inputs_ de tipo _checkbox._
+
+**En CSS** Se aplicó el enfoque _Mobile-first_ de forma general con _display: block_ en pantallas pequeñas y _display: flex_ sobre el fieldset contenedor del password para pantallas más grandes. El _input_ para guardar el password en el portapapeles se le aplicó un _display: none_ para activarse cuando se genera el primer password (ejecutado desde JS).
+
+**En JavaScript** Se utilizaron dos DOM. El primero se encarga de la generación del password, para ello obtienen los criterios definidos por el usuario en una lista de querySelectorAll sobre la clase _clausulas_ y en base a la evaluación de los criterios, se llama a una función que convierte números aleatorios entre dos rangos a caracteres basados en un éstandar utilizando el método _String.fromCharCode(numero),_ finalmente se mezclan los caracteres con el algoritmo de Fisher-Yates y se captura la string resultante en el párrafo designado; Ademas, actualiza el estado del boton _Copiar._ El segundo DOM se encarga de copiar el password en el portapapeles y se actualiza asi mismo para inhabilitarse hasta que se activa el primer DOM nuevamente.

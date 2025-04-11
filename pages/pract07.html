@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iceland&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/practics.css">
+    <link rel="stylesheet" href="../styles/pract07.css">
+    <title>Generador de Passwords</title>
+</head>
+<body>
+    <header>
+        <h1>Generador de Passwords</h1>
+    </header>
+    <main>
+        <fieldset id="containerPassword">
+            <legend>Password Generado:</legend>
+            <p id="setPassword"></p>
+            <input type="submit" id="copyPassword" value="Copiar">
+        </fieldset>
+<!--         <form action="/generarPassword">-->
+                <fieldset>
+                <legend>Criterios del Password</legend>
+                <label for="cantidadCaracteres">Cantidad de Caracteres: <output id="totalCaracteres">8</output></label>
+                <label><input type="range" name="cantidadCaracteres" class="clausulas" id="cantidadCaracteres" min="4" max="30"
+                    value="8" oninput="totalCaracteres.value = cantidadCaracteres.value"></label>
+                <label><input type="checkbox" class="clausulas" id="cr-mayus"> Incluir al menos una Mayúscula</label>
+                <label><input type="checkbox" class="clausulas" id="cr-minus"> Incluir al menos una Minúscula</label>
+                <label><input type="checkbox" class="clausulas" id="cr-number"> Incluir al menos un Número</label>
+                <label><input type="checkbox" class="clausulas" id="cr-special"> Incluir al menos un Caracter Especial</label>
+<!--                 <label><input type="checkbox" class="clausulas" id="cr-max3"> No repetir Caracteres</label> -->
+                <label><progress id="seguridadPassword" value="0" max="10"></progress><p id="seguridadMensaje">Seguridad: </p></label>
+                <label><input type="submit" class="clausulas" id="generarPassword" value="Generar Password"></label>
+            </fieldset>
+<!--         </form> -->
+    </main>
+    <script src="../scripts/campus/pract07.js"></script>
+</body>
+</html>

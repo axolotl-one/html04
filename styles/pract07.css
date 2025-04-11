@@ -1,0 +1,58 @@
+* {
+    font-family: "Iceland", sans-serif;
+    font-size: 30px;
+}
+
+h1{
+    text-align: center;
+    font-size: 45px;
+    padding: 10px 0;
+}
+
+legend, p, label, button, #cantidadCaracteres{
+    padding: 7px;
+}
+
+p{
+    overflow-wrap: anywhere;
+}
+
+input, button{
+    background-color: transparent;
+    border-color: #eee;
+    color: #eee;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.clausulas{
+    appearance: auto;
+}
+
+label{
+    display: block;
+    border-bottom: 2px solid #eee;
+}
+
+fieldset, #cantidadCaracteres{
+    width: 94%;
+}
+
+main{
+    width: 100%;
+    text-align: center;
+    justify-items: center;
+}
+
+#copyPassword{
+    display: none;
+    width: auto;
+}
+
+@media screen and (min-width: 735px) {
+    #containerPassword{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+}
