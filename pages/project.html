@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/project.css">
+    <title>Banco</title>
+</head>
+<body>
+    <header>
+        <div id="logo"></div>
+        <h1>Bancoztli</h1>
+    </header>
+
+    <main>
+        <section id="login">
+                <label> Inicia sesión</label>
+                <input name="login" type="text" id="loginIdUser" placeholder="Ingresa tu nombre de Usuario" required>
+                <input name="login" type="password" id="loginNip" pattern="\d{4,8}" placeholder="Ingresa tu NIP" 
+                    title="El nip debe contener entre 4 y 8 números" required>
+                <input name="login" type="submit" id="btnLogin" value="Iniciar Sesión">
+            <p>¿Aún no tienes cuenta?</p>
+            <button id="btnSignup">Regístrate</button>
+        </section>
+        <section id="signup">
+            <form>
+                <label>Registrate</label>
+                <input type="text" placeholder="Introduce tu nombre de Usuario" required>
+                <input type="text" placeholder="Introduce tu nombre" required>
+                <input type="text" placeholder="Introduce tu Apellido" required>
+                <input type="password" pattern="\d{4,8}" placeholder="Ingresa tu NIP"
+                    title="El nip debe contener entre 4 y 8 números" required>
+                <input type="password" pattern="\d{4,8}" placeholder="Confirma tu NIP"
+                    title="El nip debe contener entre 4 y 8 números" required>
+                <input type="submit" value="Regístrate">
+            </form>
+        </section>
+        <section id="menu">
+            <div id="bannerStatus">
+
+            </div>
+            <div id="bannerAcciones">
+                <button>Depositar</button>
+                <button>Retirar</button>
+                <button>Transaccciones</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="../scripts/campus/project.js"></script>
+</body>
+</html>

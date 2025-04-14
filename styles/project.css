@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #115599;
+    font-size: 24px;
+}
+
+#logo{
+    background-image: url("../assets/bancoztli/logo.png");
+    background-size: cover;
+    width: 90px;
+    height: 90px;
+    margin: 10px;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #dae2eb;
+}
+
+input, button{
+    padding: 10px;
+    border-radius: 20px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#login, #blocked, #bannerStatus, #bannerAcciones{
+    display: flex;
+    padding: 5vh 5vw;
+    width: 70vw;
+    height: 70vh;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px #222;
+    flex-direction: column;
+    gap: 10px;
+    justify-self: center;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #dae2eb;
+}
+
+#signup{
+    display: none;
+}
+
+#bannerStatus, #bannerAcciones{
+    height: auto;
+}
+
+#menu{
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    justify-self: center;
+}
+
+
+@media screen and (min-width: 600px){
+    #login, #signup, #menu{
+        width: 62vw;
+        height: auto;
+    }
+}
