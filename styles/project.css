@@ -16,6 +16,13 @@ body {
     margin: 10px;
 }
 
+#blocked div{
+    background-image: url("../assets/bancoztli/blockedUser.png");
+    background-size: cover;
+    width: 90px;
+    height: 90px;
+}
+
 header{
     display: flex;
     align-items: center;
@@ -35,7 +42,7 @@ form{
     gap: 10px;
 }
 
-#login, #blocked, #bannerStatus, #bannerAcciones{
+#login, #signup, #blocked, #bannerStatus, #bannerAcciones{
     display: flex;
     padding: 5vh 5vw;
     width: 70vw;
@@ -43,32 +50,84 @@ form{
     border-radius: 20px;
     box-shadow: 2px 2px 5px #222;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     justify-self: center;
     vertical-align: middle;
     text-align: center;
     background-color: #dae2eb;
 }
 
-#signup{
-    display: none;
+#blocked{
+    height: auto;
+    align-items: center;
 }
 
 #bannerStatus, #bannerAcciones{
     height: auto;
 }
 
-#menu{
+#signup{
     display: none;
-    flex-direction: column;
-    gap: 10px;
-    justify-self: center;
+    margin-top: 2vh;
+    opacity: 0;
+    transition: all 1s ease-in-out;
 }
 
+#signup.active{
+    transform: translateY(-2vh);
+    opacity: 1;
+}
+
+#login{
+    margin-top: 2vh;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+}
+
+#login.active{
+    transform: translateY(-2vh);
+    opacity: 1;
+}
+
+#menu{
+    display: none;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    gap: 10px;
+    justify-self:center;
+    opacity: 0;
+    margin-top: 2vh;
+    transition: all 1s ease-in-out;
+}
+
+#menu.active{
+    opacity: 1;
+    transform: translateY(-2vh);
+}
+
+footer{
+    width: 100%;
+    position: fixed;
+    bottom: 2vh;
+}
+
+footer h5{
+    position: static;
+    text-align: center;
+    color: #dae2eb;
+}
 
 @media screen and (min-width: 600px){
-    #login, #signup, #menu{
-        width: 62vw;
+    #login, #signup, #blocked{
+        width: 48%;
         height: auto;
+        padding: 25px;
+    }
+
+    #menu{
+        width: auto;
+        height: auto;
+        padding: 0;
     }
 }
