@@ -31,9 +31,17 @@ header{
     color: #dae2eb;
 }
 
-input, button{
+input, button, select{
     padding: 10px;
     border-radius: 20px;
+    border-style: solid;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: auto;
+}
+
+input:focus{
+    outline: none;
 }
 
 form{

@@ -30,7 +30,10 @@ const divMovs = document.getElementById("bannerAcciones");
 
 requestAnimationFrame(() => { sectionLogin.classList.add("active"); })
 
-document.getElementById("btnLogin").addEventListener("click", () => Validate());
+document.getElementById("loginform").addEventListener("submit", function(e){
+    e.preventDefault();
+    Validate();
+});
 
 document.getElementById("btnDepositar").addEventListener("click", () => OpenDepositar());
 
@@ -41,12 +44,10 @@ document.getElementById("btnOpenSignup").addEventListener("click", () => OpenSig
 function Validate(){
     const inputUsuario = document.getElementById("loginIdUser");
     const inputNip = document.getElementById("loginNip");
-    console.log(inputUsuario.value)
-    console.log(inputNip.value)
     for(let i = 0; i<ListaUsuarios.length;i++){
         if(ListaUsuarios[i].idUsuario === inputUsuario.value){
             if(ListaUsuarios[i].nip === inputNip.value){            
-                OpenMenu(ListaUsuarios[i]);
+                OpenMenu(ListaUsuarios[i],sectionLogin);
                 return;
             }else{
                 ListaUsuarios[i].fails++;
@@ -60,10 +61,10 @@ function Validate(){
     warningBlocked(false); //el usuario no existe
 }
 
-function OpenMenu(user){
-    sectionLogin.classList.remove("active");
-    sectionLogin.addEventListener("transitionend", () => {
-        sectionLogin.style.display = "none";
+function OpenMenu(user, sectionType){
+    sectionType.classList.remove("active");
+    sectionType.addEventListener("transitionend", () => {
+        sectionType.style.display = "none";
         setTimeout(() => {
             sectionMenu.style.display = "flex";
             requestAnimationFrame(() => { sectionMenu.classList.add("active");});
@@ -92,6 +93,29 @@ function OpenSignup(){
         setTimeout(() => {
             sectionSignup.style.display = "flex";
             requestAnimationFrame(() => { sectionSignup.classList.add("active");});
+            const inputUser = document.getElementById("signupUser");
+            const inputNipX = document.getElementById("signupNIPX");
+            const inputNipZ = document.getElementById("signupNIPY");
+            const inputName = document.getElementById("signupNombre");
+            const inputLast = document.getElementById("signupApellido");
+            inputUser.addEventListener("keyup", () => confirmacionUser(inputUser));
+            inputNipX.addEventListener("keyup", () => confirmacionNIP(inputNipX,inputNipZ));
+            inputNipZ.addEventListener("keyup", () => confirmacionNIP(inputNipZ,inputNipX));
+            inputName.addEventListener("keyup", () => confirmarNombre(inputName));
+            inputLast.addEventListener("keyup", () => confirmarNombre(inputLast));
+            document.getElementById("signupform").addEventListener("submit", function(e){
+                e.preventDefault();
+                if(allgreen([inputUser, inputName, inputLast, inputNipX])){
+                    btnSignup = document.getElementById("btnSignup");
+                    btnSignup.disabled = true;
+                    newUser = new Usuario(inputUser.value, inputName.value, inputLast.value, inputNipX.value, 1000);
+                    ListaUsuarios.push(newUser);
+                    OpenMenu(ListaUsuarios[ListaUsuarios.length-1],sectionSignup);
+                    setTimeout(() => { allImputsClean([inputUser, inputName, inputLast, inputNipX, inputNipZ]); btnSignup.disabled = false },2200);
+                }else{
+                    warningSignup(7);
+                }
+            });
         }, 0);
     }, { once: true });
 }
@@ -114,6 +138,82 @@ function warningBlocked(errorEnPassword){
     errorEnPassword //Operadores ternarios para este estado
         ? labelWarning.innerHTML = "El NIP es incorrecto"
         : labelWarning.innerHTML = "El usuario no existe";
+}
+
+function warningSignup(error){
+    const labelWarning = document.getElementById("signupWarning");
+    labelWarning.style.color = "#aa1111";
+    error === 1 ? labelWarning.innerHTML = "El Usuario ya existe"
+    : error === 2 ? labelWarning.innerHTML = "Completa el campo marcado"
+    : error === 3 ? labelWarning.innerHTML = "El campo no acepta números"
+    : error === 4 ? labelWarning.innerHTML = "El NIP no coincide con la confirmación"
+    : error === 5 ? labelWarning.innerHTML = "Ingresa al menos 4 numeros para el NIP"
+    : error === 6 ? labelWarning.innerHTML = "El NIP solo acepta digitos del 0 al 9"
+    : error === 7 ? labelWarning.innerHTML = "Los campos no se han llenado correctamente"
+    : labelWarning.textContent = "";
+}
+
+function confirmarNombre(input1){
+    if(!input1.value || !isNaN(input1.value) || isNumber(input1.value)){
+        input1.style.borderColor = "#aa1111";
+        !input1.value
+            ? warningSignup(2)
+            : warningSignup(3);
+    }else{
+        input1.style.borderColor = "#11aa11";
+        warningSignup(0);
+    }
+}
+
+function confirmacionUser(input1){
+    if(!input1.value || !input1.value.trim()){
+        input1.style.borderColor = "#aa1111";
+        warningSignup(2);
+        return;
+    }
+
+    for(let i = 0; i < ListaUsuarios.length; i++)
+    {
+        if( ListaUsuarios[i].idUsuario === input1.value){
+            input1.style.borderColor = "#aa1111";
+            warningSignup(1); 
+            return;
+        }else{
+            input1.style.borderColor = "#11aa11";
+            warningSignup(0);
+        }
+    }
+}
+
+function confirmacionNIP(input1, input2){
+    console.log(input1.value + " " + input2.value);
+    if(input1.value !== input2.value || input1.value.length < 4 || isNaN(input1.value)){
+        input1.style.borderColor = "#aa1111";
+        if(isNaN(input1.value)) { warningSignup(6); return; }
+        if(input1.value.length < 4) { warningSignup(5); return; }
+        input2.style.borderColor = "#aa1111";
+        warningSignup(4);
+        return;
+    }else{
+        warningSignup(0);
+        input1.style.borderColor = "#11aa11";
+        input2.style.borderColor = "#11aa11";
+    }
+}
+
+function allgreen(inputs){
+    for(let i = 0; i < inputs.length; i++)
+        if(inputs[i].style.borderColor !== "rgb(17, 170, 17)")
+            return false;
+    return true;
+}
+
+function allImputsClean(inputs){
+    inputs.forEach(input1 => { input1.value = ""; input1.style.borderColor = ""; })
+}
+
+function isNumber(str){
+    return /\d/.test(str); // /\d/ busca de 0-9, .test(str) retorna true si encuentra uno en str
 }
 
 function CloseMenu(){

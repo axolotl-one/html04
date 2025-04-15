@@ -14,25 +14,30 @@
 
     <main>
         <section id="login">
-            <label> Inicia sesión</label>
-            <input name="login" type="text" id="loginIdUser" placeholder="Ingresa tu nombre de Usuario" required>
-            <input name="login" type="password" id="loginNip" inputmode="numeric" maxlength="8" minlength="4"
-                placeholder="Ingresa tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
-            <input name="login" type="submit" id="btnLogin" value="Iniciar Sesión">
+            <form id="loginform">
+                <label> Inicia sesión</label>
+                <input name="login" type="text" id="loginIdUser" placeholder="Ingresa tu nombre de Usuario" required maxlength="20">
+                <input name="login" type="password" id="loginNip" inputmode="numeric" maxlength="8" pattern="\d{4,8}"
+                    placeholder="Ingresa tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
+                <input name="login" type="submit" id="btnLogin" value="Iniciar Sesión">
+            </form>
             <p>¿Aún no tienes cuenta?</p>
             <button id="btnOpenSignup">Regístrate</button>
             <label id="loginWarning"></label>
         </section>
         <section id="signup">
-            <label>Registrate</label>
-            <input type="text" id="signupUser" name="signup" placeholder="Ingresa tu Nombre de Usuario" required>
-            <input type="text" id="signupNombre" name="signup" placeholder="Ingresa tu Nombre" required>
-            <input type="text" id="signupApellido" name="signup" placeholder="Ingresa tu Apellido" required>
-            <input type="password" id="signupNIPX" name="signup" inputmode="tel" maxlength="8" minlength="4" 
-                placeholder="Ingresa tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
-            <input type="password" id="signupNIPY" name="signup" inputmode="tel" maxlength="8" minlength="8"
-                placeholder="Confirma tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
-            <input type="submit" id="btnSignup" name="signup" value="Regístrate">
+            <form id="signupform">
+                <label>Registrate</label>
+                <input type="text" id="signupUser" name="signup" placeholder="Ingresa tu Nombre de Usuario" required maxlength="20">
+                <input type="text" id="signupNombre" name="signup" placeholder="Ingresa tu Nombre" required maxlength="30">
+                <input type="text" id="signupApellido" name="signup" placeholder="Ingresa tu Apellido" required maxlength="30">
+                <input type="password" id="signupNIPX" name="signup" inputmode="numeric" maxlength="8" pattern="\d{4,8}" 
+                    placeholder="Ingresa tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
+                <input type="password" id="signupNIPY" name="signup" inputmode="numeric" maxlength="8" pattern="\d{4,8}"
+                    placeholder="Confirma tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
+                <input type="submit" id="btnSignup" name="signup" value="Regístrate">
+            </form>
+            <label id="signupWarning"></label>
         </section>
         <section id="menu">
             <div id="bannerStatus">
@@ -47,7 +52,7 @@
         </section>
     </main>
     <footer>
-        <h5>B.2 Simulador de un Cajero Automático</h5>
+        <h5>B.3 Simulador de un Cajero Automático</h5>
     </footer>
     <script src="../scripts/campus/project.js"></script>
 </body>
