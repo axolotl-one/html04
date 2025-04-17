@@ -13,9 +13,9 @@ class Usuario{
 
 
 const ListaUsuarios = [];
-const user01 = new Usuario("cliente01","Horacio","Tacubeño","0456",5000);
-const user02 = new Usuario("cliente02","Marisol","Hernandez","1010",4000);
-const user03 = new Usuario("cliente03","Marcela","Camacho","2021",3000);
+const user01 = new Usuario("cliente01","Horacio","Tacubeño","0456",950);
+const user02 = new Usuario("cliente02","Marisol","Hernandez","1010",800);
+const user03 = new Usuario("cliente03","Marcela","Camacho","2021",790);
 ListaUsuarios.push(user01);
 ListaUsuarios.push(user02);
 ListaUsuarios.push(user03);
@@ -34,8 +34,6 @@ document.getElementById("loginform").addEventListener("submit", function(e){
     e.preventDefault();
     Validate();
 });
-
-document.getElementById("btnDepositar").addEventListener("click", () => OpenDepositar());
 
 document.getElementById("btnLogout").addEventListener("click", () => CloseMenu());
 
@@ -61,7 +59,7 @@ function Validate(){
     warningBlocked(false); //el usuario no existe
 }
 
-function OpenMenu(user, sectionType){
+function OpenMenu(user, sectionType){  //Solicita el usuario y el login/signup con que inicio
     sectionType.classList.remove("active");
     sectionType.addEventListener("transitionend", () => {
         sectionType.style.display = "none";
@@ -71,19 +69,113 @@ function OpenMenu(user, sectionType){
         }, 0);
     }, { once: true });
     OpenStatus(user.nombre, user.saldo);
+    OpenMovs(user);
 }
 
 function OpenStatus(nombre, saldo){
     const h1Saludo = document.createElement("h1");
     const h2Saldo = document.createElement("h2");
     h1Saludo.innerHTML = "Hola de nuevo, " + nombre;
-    h2Saldo.innerHTML = "Tu saldo actual: " + saldo;
+    //h2Saldo.innerHTML = "Tu saldo actual: " + saldo;
     divStatus.appendChild(h1Saludo);
-    divStatus.appendChild(h2Saldo);
+    //divStatus.appendChild(h2Saldo);
 }
 
-function OpenMovs(){
+function OpenMovs(user){
+    const sectionSaldo = document.getElementById("consultarSaldo");
+    const sectionDepositar = document.getElementById("depositar");
+    const sectionRetirar = document.getElementById("retirar");
+    // TODO: const sectionTransacc = document.getElementById("transacc");
+    document.getElementById("btnConsultarSaldo").addEventListener("click", () => {
+        OpenSection(sectionSaldo, sectionMenu);
+        actConsultarSaldo(user, sectionSaldo);
+    });
+    document.getElementById("btnOpenDeposito").addEventListener("click", () => { 
+        OpenSection(sectionDepositar, sectionMenu);
+        actDeposito(user, sectionDepositar);
+    });
+    document.getElementById("btnOpenRetiro").addEventListener("click", () => { 
+        OpenSection(sectionRetirar, sectionMenu);
+        actRetiro(user, sectionRetirar);
+    });
+}
 
+function OpenSection(sectionOpen, sectionClose){  // :TODO: Aplicar la funcion para todos los OpenSeccion; p.e. OpenMenu
+    sectionClose.classList.remove("active");
+    console.log("Close class active of " + sectionClose.id);
+    console.log("Waiting transition end of " + sectionClose.id);
+    sectionClose.addEventListener("transitionend", () => {
+        sectionClose.style.display = "none";
+        console.log("Close display to none of " + sectionClose.id);
+        setTimeout(() => {
+            sectionOpen.style.display = "flex";
+            console.log("Open display flex of " + sectionOpen.id)
+            requestAnimationFrame(() => { sectionOpen.classList.add("active"); console.log("Open Class of " + sectionOpen.id)})
+        }, 0);
+    }, { once: true });
+}
+
+function actConsultarSaldo(user, sectionClose){
+    document.getElementById("btnCloseSaldo").addEventListener("click", () => OpenSection(sectionMenu, sectionClose));
+    const pSaldo = document.getElementById("saldo");
+    pSaldo.textContent = "Tu saldo es de: $ " + user.saldo;
+}
+
+function actDeposito(user, sectionClose){
+    document.getElementById("depositoform").addEventListener("submit", function(e){
+        e.preventDefault();
+        const inputDepo = document.getElementById("depoMonto");
+        if((parseInt(inputDepo.value) + user.saldo) <= 990){
+            document.getElementById("btnDepositar").disabled = true;
+            setTimeout(() => { document.getElementById("btnDepositar").disabled = false; }, 2000);
+            user.saldo += parseInt(inputDepo.value);
+            inputDepo.value = "";
+            warningCase("depoWarning",3,0);
+            OpenSection(sectionMenu, sectionClose);
+            return;
+        }
+        else
+            warningCase("depoWarning",3,31);
+    });
+    document.getElementById("depositoform").addEventListener("reset", function(e) {
+        e.preventDefault();
+        OpenSection(sectionMenu, sectionClose);
+    });
+}
+
+function actRetiro(user, sectionClose){
+    document.getElementById("retiroform").addEventListener("submit", function(e){
+        e.preventDefault();
+        const inputRetiro = document.getElementById("retiroMonto");
+        if((user.saldo - parseInt(inputRetiro.value)) >= 10){
+            document.getElementById("btnRetirar").disabled = true;
+            setTimeout(() => { document.getElementById("btnDepositar").disabled = false; }, 2000);
+            user.saldo -= parseInt(inputRetiro.value);
+            inputRetiro.value = "";
+            warningCase("retiroWarning",3,0);
+            OpenSection(sectionMenu, sectionClose);
+            return;
+        }
+        else
+            warningCase("retiroWarning",3,32);
+    });
+    document.getElementById("retiroform").addEventListener("reset", function(e) {
+        e.preventDefault();
+        OpenSection(sectionMenu, sectionClose);
+    });
+}
+
+function warningCase(idLabel, numSection, error){  // TODO: Aplicar la funcion para todos los warninglabel; p.e. warningSignup
+    const labelWarning = document.getElementById(idLabel);
+    labelWarning.style.color = "#aa1111";
+    error === 1 ? labelWarning.innerHTML = "Error indefinido"
+    : error === 31 ? labelWarning.innerHTML = "El deposito excede el saldo máximo permitido de $ 990."
+    : error === 32 ? labelWarning.innerHTML = "Retiro denegado. Debe tener al menos $ 10 de saldo en cuenta"
+    : error === 33 ? labelWarning.innerHTML = "El NIP no coincide con la confirmación"
+    : error === 34 ? labelWarning.innerHTML = "Ingresa al menos 4 numeros para el NIP"
+    : error === 35 ? labelWarning.innerHTML = "El NIP solo acepta digitos del 0 al 9"
+    : error === 36 ? labelWarning.innerHTML = "Los campos no se han llenado correctamente"
+    : labelWarning.textContent = "";
 }
 
 function OpenSignup(){
@@ -108,7 +200,7 @@ function OpenSignup(){
                 if(allgreen([inputUser, inputName, inputLast, inputNipX])){
                     btnSignup = document.getElementById("btnSignup");
                     btnSignup.disabled = true;
-                    newUser = new Usuario(inputUser.value, inputName.value, inputLast.value, inputNipX.value, 1000);
+                    newUser = new Usuario(inputUser.value, inputName.value, inputLast.value, inputNipX.value, 100);
                     ListaUsuarios.push(newUser);
                     OpenMenu(ListaUsuarios[ListaUsuarios.length-1],sectionSignup);
                     setTimeout(() => { allImputsClean([inputUser, inputName, inputLast, inputNipX, inputNipZ]); btnSignup.disabled = false },2200);
@@ -230,3 +322,31 @@ function CloseMenu(){
     }, { once: true });
     ListaUsuarios.forEach(user => { user.fails = 0; })
 }
+
+
+/* Cambio de opacity de 0 a 1 cuando el display cambia de none a flex
+~~~~~~~~~~~~~
+#elemento {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#elemento.activo {
+  opacity: 1;
+}
+~~~~~~~
+const elemento = document.getElementById("elemento");
+
+function activarElemento() {
+  elemento.style.display = "flex";
+  requestAnimationFrame(() => {
+    element.classList.add("activo"); //crea la clase
+  });
+}
+
+function desactivarElemento() {
+  element.classList.remove("activo"); //elimina la clase
+  element.addEventListener('transitionend', () => {
+    element.style.display = 'none';  //espera el fin de la transicion para desactivar el display
+  }, { once: true });
+}*/

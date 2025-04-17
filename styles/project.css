@@ -8,27 +8,18 @@ body {
     font-size: 24px;
 }
 
-#logo{
-    background-image: url("../assets/bancoztli/logo.png");
-    background-size: cover;
-    width: 90px;
-    height: 90px;
-    margin: 10px;
-}
-
-#blocked div{
-    background-image: url("../assets/bancoztli/blockedUser.png");
-    background-size: cover;
-    width: 90px;
-    height: 90px;
-}
-
 header{
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     color: #dae2eb;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 input, button, select{
@@ -50,7 +41,22 @@ form{
     gap: 10px;
 }
 
-#login, #signup, #blocked, #bannerStatus, #bannerAcciones{
+#logo{
+    background-image: url("../assets/bancoztli/logo.png");
+    background-size: cover;
+    width: 90px;
+    height: 90px;
+    margin: 10px;
+}
+
+#blocked div{
+    background-image: url("../assets/bancoztli/blockedUser.png");
+    background-size: cover;
+    width: 90px;
+    height: 90px;
+}
+
+.banners { /* #login, #signup, #blocked, #bannerStatus, #bannerAcciones{ */
     display: flex;
     padding: 5vh 5vw;
     width: 70vw;
@@ -59,9 +65,6 @@ form{
     box-shadow: 2px 2px 5px #222;
     flex-direction: column;
     gap: 15px;
-    justify-self: center;
-    vertical-align: middle;
-    text-align: center;
     background-color: #dae2eb;
 }
 
@@ -97,7 +100,7 @@ form{
     opacity: 1;
 }
 
-#menu{
+#menu, #consultarSaldo, #depositar, #retirar, #transacc{
     display: none;
     width: auto;
     height: auto;
@@ -109,7 +112,7 @@ form{
     transition: all 1s ease-in-out;
 }
 
-#menu.active{
+#menu.active, #consultarSaldo.active, #depositar.active, #retirar.active, #transacc.active{
     opacity: 1;
     transform: translateY(-2vh);
 }
