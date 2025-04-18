@@ -26,59 +26,47 @@ const daddymain = document.querySelector("main");
 const divStatus = document.getElementById("bannerStatus");
 const divMovs = document.getElementById("bannerAcciones");
 
-//addEventListener("transitionend", () => { sectionLogin.classList.add() })
-
 requestAnimationFrame(() => { sectionLogin.classList.add("active"); })
 
 document.getElementById("loginform").addEventListener("submit", function(e){
     e.preventDefault();
-    Validate();
+    ValidateLogin();
 });
 
 document.getElementById("btnLogout").addEventListener("click", () => CloseMenu());
 
 document.getElementById("btnOpenSignup").addEventListener("click", () => OpenSignup());
 
-function Validate(){
+function ValidateLogin(){
     const inputUsuario = document.getElementById("loginIdUser");
     const inputNip = document.getElementById("loginNip");
     for(let i = 0; i<ListaUsuarios.length;i++){
         if(ListaUsuarios[i].idUsuario === inputUsuario.value){
-            if(ListaUsuarios[i].nip === inputNip.value){            
+            if(ListaUsuarios[i].nip === inputNip.value){
+                warningCase("loginWarning",1,0);
                 OpenMenu(ListaUsuarios[i],sectionLogin);
                 return;
             }else{
                 ListaUsuarios[i].fails++;
-                warningBlocked(true);
+                warningCase("loginWarning",1,12);
                 if(ListaUsuarios[i].fails >= 3)
                     blocked();
                 return;
             }
         }
     }
-    warningBlocked(false); //el usuario no existe
+    warningCase("loginWarning",1,11); //el usuario no existe
 }
 
 function OpenMenu(user, sectionType){  //Solicita el usuario y el login/signup con que inicio
-    sectionType.classList.remove("active");
-    sectionType.addEventListener("transitionend", () => {
-        sectionType.style.display = "none";
-        setTimeout(() => {
-            sectionMenu.style.display = "flex";
-            requestAnimationFrame(() => { sectionMenu.classList.add("active");});
-        }, 0);
-    }, { once: true });
+    OpenSection(sectionMenu, sectionType);
     OpenStatus(user.nombre, user.saldo);
     OpenMovs(user);
 }
 
-function OpenStatus(nombre, saldo){
-    const h1Saludo = document.createElement("h1");
-    const h2Saldo = document.createElement("h2");
+function OpenStatus(nombre){
+    const h1Saludo = document.getElementById("saludo");
     h1Saludo.innerHTML = "Hola de nuevo, " + nombre;
-    //h2Saldo.innerHTML = "Tu saldo actual: " + saldo;
-    divStatus.appendChild(h1Saludo);
-    //divStatus.appendChild(h2Saldo);
 }
 
 function OpenMovs(user){
@@ -92,15 +80,140 @@ function OpenMovs(user){
     });
     document.getElementById("btnOpenDeposito").addEventListener("click", () => { 
         OpenSection(sectionDepositar, sectionMenu);
-        actDeposito(user, sectionDepositar);
+        actTransacc(user, "depositoform", "submitDeposito", "depoMonto", "depoWarning", 31, sectionDepositar);
     });
     document.getElementById("btnOpenRetiro").addEventListener("click", () => { 
         OpenSection(sectionRetirar, sectionMenu);
-        actRetiro(user, sectionRetirar);
+        actTransacc(user, "retiroform", "submitRetiro", "retiroMonto", "retiroWarning", 32, sectionRetirar);
     });
 }
 
-function OpenSection(sectionOpen, sectionClose){  // :TODO: Aplicar la funcion para todos los OpenSeccion; p.e. OpenMenu
+
+
+function actConsultarSaldo(user, sectionClose){
+    document.getElementById("btnCloseSaldo").addEventListener("click", () => OpenSection(sectionMenu, sectionClose));
+    const pSaldo = document.getElementById("saldo");
+    pSaldo.textContent = "Tu saldo es de: $ " + user.saldo;
+}
+
+function actTransacc(user, idMovform, idSubmit, idInput, idWarninglabel, idWarningCase, sectionClose){ //1.Depo 2.Retiro
+    document.getElementById(idMovform).addEventListener("submit", function(e){
+        e.preventDefault();
+        const input1 = document.getElementById(idInput);
+        if(((parseInt(input1.value) + user.saldo) <= 990 ) && (idMovform === "depositoform")){
+            user.saldo += parseInt(input1.value);
+        }else if(((user.saldo - parseInt(input1.value)) >= 10) && (idMovform === "retiroform")){
+            user.saldo -= parseInt(input1.value);
+        }else{ warningCase(idWarninglabel, 4, idWarningCase); return; }
+        document.getElementById(idSubmit).disabled = true;
+        setTimeout(() => { document.getElementById(idSubmit).disabled = false}, 2000);
+        input1.value = 0;
+        warningCase(idWarninglabel, 4, 0);
+        OpenSection(sectionMenu, sectionClose);
+    });
+    document.getElementById(idMovform).addEventListener("reset", function(e) {
+        e.preventDefault();
+        warningCase(idWarninglabel, 4, 0);
+        OpenSection(sectionMenu, sectionClose);
+    });
+}
+
+function OpenSignup(){
+    OpenSection(sectionSignup, sectionLogin);
+    const inputUser = document.getElementById("signupUser");
+    const inputNipX = document.getElementById("signupNIPX");
+    const inputNipZ = document.getElementById("signupNIPY");
+    const inputName = document.getElementById("signupNombre");
+    const inputLast = document.getElementById("signupApellido");
+    inputUser.addEventListener("keyup", () => confirmacionUser(inputUser));
+    inputNipX.addEventListener("keyup", () => confirmacionNIP(inputNipX,inputNipZ));
+    inputNipZ.addEventListener("keyup", () => confirmacionNIP(inputNipZ,inputNipX));
+    inputName.addEventListener("keyup", () => confirmarNombre(inputName));
+    inputLast.addEventListener("keyup", () => confirmarNombre(inputLast));
+    document.getElementById("signupform").addEventListener("submit", function(e){
+        e.preventDefault();
+        if(allgreen([inputUser, inputName, inputLast, inputNipX])){
+            submitSignup = document.getElementById("submitSignup");
+            submitSignup.disabled = true;
+            newUser = new Usuario(inputUser.value, inputName.value, inputLast.value, inputNipX.value, 100);
+            ListaUsuarios.push(newUser);
+            OpenMenu(ListaUsuarios[ListaUsuarios.length-1],sectionSignup);
+            setTimeout(() => { allImputsClean([inputUser, inputName, inputLast, inputNipX, inputNipZ]); submitSignup.disabled = false },2200);
+        }else{
+            warningCase("signupWarning",4,27);
+        }
+    });
+}
+
+function confirmarNombre(input1){
+    if(!input1.value || !isNaN(input1.value) || isNumber(input1.value)){
+        input1.style.borderColor = "#aa1111";
+        !input1.value
+            ? warningCase("signupWarning",4,21)
+            : warningCase("signupWarning",4,23);
+    }else{
+        input1.style.borderColor = "#11aa11";
+        warningCase("signupWarning",4,0);
+    }
+}
+
+function confirmacionUser(input1){
+    if(!input1.value || !input1.value.trim()){
+        input1.style.borderColor = "#aa1111";
+        warningCase("signupWarning",4,21);
+        return;
+    }
+
+    for(let i = 0; i < ListaUsuarios.length; i++){
+        if( ListaUsuarios[i].idUsuario === input1.value){
+            input1.style.borderColor = "#aa1111";
+            warningCase("signupWarning",4,22); 
+            return;
+        }else{
+            input1.style.borderColor = "#11aa11";
+            warningCase("signupWarning",4,0)
+        }
+    }
+}
+
+function confirmacionNIP(input1, input2){
+    console.log(input1.value + " " + input2.value);
+    if(input1.value !== input2.value || input1.value.length < 4 || isNaN(input1.value)){
+        input1.style.borderColor = "#aa1111";
+        if(isNaN(input1.value)) { warningCase("signupWarning",4,26); return; }
+        if(input1.value.length < 4) { warningCase("signupWarning",4,25); return; }
+        input2.style.borderColor = "#aa1111";
+        warningCase("signupWarning",4,24);
+        return;
+    }else{
+        warningCase("signupWarning",4,0);
+        input1.style.borderColor = "#11aa11";
+        input2.style.borderColor = "#11aa11";
+    }
+}
+
+function allgreen(inputs){
+    for(let i = 0; i < inputs.length; i++)
+        if(inputs[i].style.borderColor !== "rgb(17, 170, 17)")
+            return false;
+    return true;
+}
+
+function CloseMenu(){
+    OpenSection(sectionLogin, sectionMenu);
+    ListaUsuarios.forEach(user => { user.fails = 0; })
+}
+
+function blocked(){
+    document.querySelectorAll("section").forEach(secc => {
+        if(secc.id === "blocked")
+            secc.style.display = "flex";
+        else
+            secc.remove();
+    })
+}
+
+function OpenSection(sectionOpen, sectionClose){
     sectionClose.classList.remove("active");
     console.log("Close class active of " + sectionClose.id);
     console.log("Waiting transition end of " + sectionClose.id);
@@ -115,189 +228,22 @@ function OpenSection(sectionOpen, sectionClose){  // :TODO: Aplicar la funcion p
     }, { once: true });
 }
 
-function actConsultarSaldo(user, sectionClose){
-    document.getElementById("btnCloseSaldo").addEventListener("click", () => OpenSection(sectionMenu, sectionClose));
-    const pSaldo = document.getElementById("saldo");
-    pSaldo.textContent = "Tu saldo es de: $ " + user.saldo;
-}
-
-function actDeposito(user, sectionClose){
-    document.getElementById("depositoform").addEventListener("submit", function(e){
-        e.preventDefault();
-        const inputDepo = document.getElementById("depoMonto");
-        if((parseInt(inputDepo.value) + user.saldo) <= 990){
-            document.getElementById("btnDepositar").disabled = true;
-            setTimeout(() => { document.getElementById("btnDepositar").disabled = false; }, 2000);
-            user.saldo += parseInt(inputDepo.value);
-            inputDepo.value = "";
-            warningCase("depoWarning",3,0);
-            OpenSection(sectionMenu, sectionClose);
-            return;
-        }
-        else
-            warningCase("depoWarning",3,31);
-    });
-    document.getElementById("depositoform").addEventListener("reset", function(e) {
-        e.preventDefault();
-        OpenSection(sectionMenu, sectionClose);
-    });
-}
-
-function actRetiro(user, sectionClose){
-    document.getElementById("retiroform").addEventListener("submit", function(e){
-        e.preventDefault();
-        const inputRetiro = document.getElementById("retiroMonto");
-        if((user.saldo - parseInt(inputRetiro.value)) >= 10){
-            document.getElementById("btnRetirar").disabled = true;
-            setTimeout(() => { document.getElementById("btnDepositar").disabled = false; }, 2000);
-            user.saldo -= parseInt(inputRetiro.value);
-            inputRetiro.value = "";
-            warningCase("retiroWarning",3,0);
-            OpenSection(sectionMenu, sectionClose);
-            return;
-        }
-        else
-            warningCase("retiroWarning",3,32);
-    });
-    document.getElementById("retiroform").addEventListener("reset", function(e) {
-        e.preventDefault();
-        OpenSection(sectionMenu, sectionClose);
-    });
-}
-
-function warningCase(idLabel, numSection, error){  // TODO: Aplicar la funcion para todos los warninglabel; p.e. warningSignup
+function warningCase(idLabel, numSection, error){  // 1.Login 2.Signup 3.Menu 4.Operaciones
     const labelWarning = document.getElementById(idLabel);
     labelWarning.style.color = "#aa1111";
     error === 1 ? labelWarning.innerHTML = "Error indefinido"
+    : error === 11 ? labelWarning.innerHTML = "El Usuario no existe"
+    : error === 12 ? labelWarning.innerHTML = "El NIP es incorrecto"
+    : error === 21 ? labelWarning.innerHTML = "Completa el campo marcado"
+    : error === 22 ? labelWarning.innerHTML = "El Usuario ya existe"
+    : error === 23 ? labelWarning.innerHTML = "El campo no acepta números"
+    : error === 24 ? labelWarning.innerHTML = "El NIP no coincide con la confirmación"
+    : error === 25 ? labelWarning.innerHTML = "Ingresa al menos 4 numeros para el NIP"
+    : error === 26 ? labelWarning.innerHTML = "El NIP solo acepta digitos del 0 al 9"
+    : error === 27 ? labelWarning.innerHTML = "Los campos no se han llenado correctamente"
     : error === 31 ? labelWarning.innerHTML = "El deposito excede el saldo máximo permitido de $ 990."
     : error === 32 ? labelWarning.innerHTML = "Retiro denegado. Debe tener al menos $ 10 de saldo en cuenta"
-    : error === 33 ? labelWarning.innerHTML = "El NIP no coincide con la confirmación"
-    : error === 34 ? labelWarning.innerHTML = "Ingresa al menos 4 numeros para el NIP"
-    : error === 35 ? labelWarning.innerHTML = "El NIP solo acepta digitos del 0 al 9"
-    : error === 36 ? labelWarning.innerHTML = "Los campos no se han llenado correctamente"
     : labelWarning.textContent = "";
-}
-
-function OpenSignup(){
-    sectionLogin.classList.remove("active");
-    sectionLogin.addEventListener("transitionend", () => {
-        sectionLogin.style.display = "none";
-        setTimeout(() => {
-            sectionSignup.style.display = "flex";
-            requestAnimationFrame(() => { sectionSignup.classList.add("active");});
-            const inputUser = document.getElementById("signupUser");
-            const inputNipX = document.getElementById("signupNIPX");
-            const inputNipZ = document.getElementById("signupNIPY");
-            const inputName = document.getElementById("signupNombre");
-            const inputLast = document.getElementById("signupApellido");
-            inputUser.addEventListener("keyup", () => confirmacionUser(inputUser));
-            inputNipX.addEventListener("keyup", () => confirmacionNIP(inputNipX,inputNipZ));
-            inputNipZ.addEventListener("keyup", () => confirmacionNIP(inputNipZ,inputNipX));
-            inputName.addEventListener("keyup", () => confirmarNombre(inputName));
-            inputLast.addEventListener("keyup", () => confirmarNombre(inputLast));
-            document.getElementById("signupform").addEventListener("submit", function(e){
-                e.preventDefault();
-                if(allgreen([inputUser, inputName, inputLast, inputNipX])){
-                    btnSignup = document.getElementById("btnSignup");
-                    btnSignup.disabled = true;
-                    newUser = new Usuario(inputUser.value, inputName.value, inputLast.value, inputNipX.value, 100);
-                    ListaUsuarios.push(newUser);
-                    OpenMenu(ListaUsuarios[ListaUsuarios.length-1],sectionSignup);
-                    setTimeout(() => { allImputsClean([inputUser, inputName, inputLast, inputNipX, inputNipZ]); btnSignup.disabled = false },2200);
-                }else{
-                    warningSignup(7);
-                }
-            });
-        }, 0);
-    }, { once: true });
-}
-
-function blocked(){
-    sectionLogin.style.display = "none";
-    const sectionBlocked = document.createElement("section");
-    const divIcon = document.createElement("div")
-    const h1Blocked = document.createElement("h1");
-    sectionBlocked.id = "blocked";
-    h1Blocked.innerHTML = "Se ha bloqueado el usuario por exceso de intentos.";
-    sectionBlocked.appendChild(divIcon)
-    sectionBlocked.appendChild(h1Blocked);
-    daddymain.appendChild(sectionBlocked);
-}
-
-function warningBlocked(errorEnPassword){
-    const labelWarning = document.getElementById("loginWarning");
-    labelWarning.style.color = "#aa1111";
-    errorEnPassword //Operadores ternarios para este estado
-        ? labelWarning.innerHTML = "El NIP es incorrecto"
-        : labelWarning.innerHTML = "El usuario no existe";
-}
-
-function warningSignup(error){
-    const labelWarning = document.getElementById("signupWarning");
-    labelWarning.style.color = "#aa1111";
-    error === 1 ? labelWarning.innerHTML = "El Usuario ya existe"
-    : error === 2 ? labelWarning.innerHTML = "Completa el campo marcado"
-    : error === 3 ? labelWarning.innerHTML = "El campo no acepta números"
-    : error === 4 ? labelWarning.innerHTML = "El NIP no coincide con la confirmación"
-    : error === 5 ? labelWarning.innerHTML = "Ingresa al menos 4 numeros para el NIP"
-    : error === 6 ? labelWarning.innerHTML = "El NIP solo acepta digitos del 0 al 9"
-    : error === 7 ? labelWarning.innerHTML = "Los campos no se han llenado correctamente"
-    : labelWarning.textContent = "";
-}
-
-function confirmarNombre(input1){
-    if(!input1.value || !isNaN(input1.value) || isNumber(input1.value)){
-        input1.style.borderColor = "#aa1111";
-        !input1.value
-            ? warningSignup(2)
-            : warningSignup(3);
-    }else{
-        input1.style.borderColor = "#11aa11";
-        warningSignup(0);
-    }
-}
-
-function confirmacionUser(input1){
-    if(!input1.value || !input1.value.trim()){
-        input1.style.borderColor = "#aa1111";
-        warningSignup(2);
-        return;
-    }
-
-    for(let i = 0; i < ListaUsuarios.length; i++)
-    {
-        if( ListaUsuarios[i].idUsuario === input1.value){
-            input1.style.borderColor = "#aa1111";
-            warningSignup(1); 
-            return;
-        }else{
-            input1.style.borderColor = "#11aa11";
-            warningSignup(0);
-        }
-    }
-}
-
-function confirmacionNIP(input1, input2){
-    console.log(input1.value + " " + input2.value);
-    if(input1.value !== input2.value || input1.value.length < 4 || isNaN(input1.value)){
-        input1.style.borderColor = "#aa1111";
-        if(isNaN(input1.value)) { warningSignup(6); return; }
-        if(input1.value.length < 4) { warningSignup(5); return; }
-        input2.style.borderColor = "#aa1111";
-        warningSignup(4);
-        return;
-    }else{
-        warningSignup(0);
-        input1.style.borderColor = "#11aa11";
-        input2.style.borderColor = "#11aa11";
-    }
-}
-
-function allgreen(inputs){
-    for(let i = 0; i < inputs.length; i++)
-        if(inputs[i].style.borderColor !== "rgb(17, 170, 17)")
-            return false;
-    return true;
 }
 
 function allImputsClean(inputs){
@@ -307,22 +253,6 @@ function allImputsClean(inputs){
 function isNumber(str){
     return /\d/.test(str); // /\d/ busca de 0-9, .test(str) retorna true si encuentra uno en str
 }
-
-function CloseMenu(){
-    sectionMenu.classList.remove("active");
-    sectionMenu.addEventListener("transitionend", () => {
-        sectionMenu.style.display = "none";
-        setTimeout(() => {
-            sectionLogin.style.display = "flex";
-            requestAnimationFrame(() => sectionLogin.classList.add("active"))
-        }, 0)
-        const labelWarning = document.getElementById("loginWarning");
-        labelWarning.innerHTML = ""; //respeta etiquetas al limpiar
-        divStatus.textContent = "";  //no respeta etiquetas al limpiar
-    }, { once: true });
-    ListaUsuarios.forEach(user => { user.fails = 0; })
-}
-
 
 /* Cambio de opacity de 0 a 1 cuando el display cambia de none a flex
 ~~~~~~~~~~~~~
@@ -349,4 +279,7 @@ function desactivarElemento() {
   element.addEventListener('transitionend', () => {
     element.style.display = 'none';  //espera el fin de la transicion para desactivar el display
   }, { once: true });
+
+labelWarning.innerHTML = ""; //respeta etiquetas al limpiar
+divStatus.textContent = "";  //no respeta etiquetas al limpiar
 }*/

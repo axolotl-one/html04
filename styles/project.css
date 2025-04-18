@@ -60,7 +60,7 @@ form{
     display: flex;
     padding: 5vh 5vw;
     width: 70vw;
-    height: 70vh;
+    height: auto;
     border-radius: 20px;
     box-shadow: 2px 2px 5px #222;
     flex-direction: column;
@@ -69,41 +69,18 @@ form{
 }
 
 #blocked{
-    height: auto;
+    display: none;
     align-items: center;
 }
 
-#bannerStatus, #bannerAcciones{
-    height: auto;
-}
-
-#signup{
-    display: none;
+#login{  /*Banner origen*/
     margin-top: 2vh;
     opacity: 0;
     transition: all 1s ease-in-out;
 }
 
-#signup.active{
-    transform: translateY(-2vh);
-    opacity: 1;
-}
-
-#login{
-    margin-top: 2vh;
-    opacity: 0;
-    transition: all 1s ease-in-out;
-}
-
-#login.active{
-    transform: translateY(-2vh);
-    opacity: 1;
-}
-
-#menu, #consultarSaldo, #depositar, #retirar, #transacc{
+#signup, #menu, #consultarSaldo, #depositar, #retirar, #transacc{
     display: none;
-    width: auto;
-    height: auto;
     flex-direction: column;
     gap: 10px;
     justify-self:center;
@@ -112,7 +89,8 @@ form{
     transition: all 1s ease-in-out;
 }
 
-#menu.active, #consultarSaldo.active, #depositar.active, #retirar.active, #transacc.active{
+#login.active, #signup.active, #menu.active,
+#consultarSaldo.active, #depositar.active, #retirar.active, #transacc.active{
     opacity: 1;
     transform: translateY(-2vh);
 }

@@ -35,13 +35,15 @@
                     placeholder="Ingresa tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
                 <input type="password" id="signupNIPY" name="signup" inputmode="numeric" maxlength="8" pattern="\d{4,8}"
                     placeholder="Confirma tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
-                <input type="submit" id="btnSignup" name="signup" value="Regístrate">
+                    <input type="reset" id="resetSignup" name="signup" value="Cancelar Registro">
+                    <input type="submit" id="submitSignup" name="signup" value="Regístrarse">
             </form>
             <label id="signupWarning"></label>
         </section>
         <section id="menu">
             <div id="bannerStatus" class="banners">
-
+                <h1 id="saludo"></h1>
+                <h2 id="novedad"></h2>
             </div>
             <div id="bannerAcciones" class="banners">
                 <button id="btnConsultarSaldo">Consultar Saldo</button>
@@ -60,8 +62,8 @@
             <form id="depositoform">
                 <input type="number" id="depoMonto" name="deposito" inputmode="numeric" maxlength="3" max="980" min="1" autocomplete="off"
                     placeholder="Ingresa el monto a depositar" title="Deposito mínimo de $ 1 y Máximo de $ 980" required>
-                <input type="reset" id="btnCloseDeposito" name="deposito" value="Cancelar Depósito">
-                <input type="submit" id="btnDepositar" name="deposito" value="Realizar Depósito">
+                <input type="reset" id="resetDeposito" name="deposito" value="Cancelar Depósito">
+                <input type="submit" id="submitDeposito" name="deposito" value="Realizar Depósito">
             </form>
             <label id="depoWarning"></label>
         </section>
@@ -69,17 +71,21 @@
             <form id="retiroform">
                 <input type="number" id="retiroMonto" name="retiro" inputmode="numeric" maxlength="3" max="980" min="1" autocomplete="off"
                     placeholder="Ingresa el monto a retirar" title="Retiro mínimo de $ 1 y Máximo de $ 980" required>
-                <input type="reset" id="btnCloseRetirar" name="retiro" value="Cancelar Retiro">
-                <input type="submit" id="btnRetirar" name="retiro" value="Realizar Retiro">
+                <input type="reset" id="resetRetiro" name="retiro" value="Cancelar Retiro">
+                <input type="submit" id="submitRetiro" name="retiro" value="Realizar Retiro">
             </form>
             <label id="retiroWarning"></label>
         </section>
         <section id="transacc" class="banners">
             <h1>Historial de transaccciones</h1>
         </section>
+        <section id="blocked" class="banners">
+            <div></div>
+            <h1>Se ha bloqueado al usuario por exceso de intentos</h1>
+        </section>
     </main>
     <footer>
-        <h5>B.4 Simulador ATM</h5>
+        <h5>B.5 Simulador ATM</h5>
     </footer>
     <script src="../scripts/campus/project.js"></script>
 </body>
