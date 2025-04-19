@@ -23,7 +23,7 @@ class Usuario{
     
     deposito(monto){
         this.saldo += monto;
-        const transacc = new Transaccion(this.listTransacc.length+1,"Depósito: + $ ", monto);
+        const transacc = new Transaccion(this.listTransacc.length+1, "Depósito: + $ ", monto);
         this.listTransacc.unshift(transacc);
     }
 
@@ -42,125 +42,116 @@ class Usuario{
 
 
 const ListaUsuarios = [];
-const user01 = new Usuario("cliente01","Horacio","Tacubeño","0456");
-const user02 = new Usuario("cliente02","Marisol","Hernandez","1010");
-const user03 = new Usuario("cliente03","Marcela","Camacho","2021");
-user01.apertura(912);
-user02.apertura(807);
-user03.apertura(789);
-ListaUsuarios.push(user01);
-ListaUsuarios.push(user02);
-ListaUsuarios.push(user03);
+const ListaListeners = [];
 const sectionSignup = document.getElementById("signup");
 const sectionLogin = document.getElementById("login");
 const sectionMenu = document.getElementById("menu");
-const daddymain = document.querySelector("main");
-const divStatus = document.getElementById("bannerStatus");
-const divMovs = document.getElementById("bannerAcciones");
 
 requestAnimationFrame(() => { sectionLogin.classList.add("active"); })
 
 document.getElementById("loginform").addEventListener("submit", function(e){
     e.preventDefault();
+    generarUsuarios();
     ValidateLogin();
 });
-
-document.getElementById("btnLogout").addEventListener("click", () => CloseMenu());
 
 document.getElementById("btnOpenSignup").addEventListener("click", () => OpenSignup());
 
 function ValidateLogin(){
     const inputUsuario = document.getElementById("loginIdUser");
     const inputNip = document.getElementById("loginNip");
-    for(let i = 0; i<ListaUsuarios.length;i++){
+    for(let i = 0; i < ListaUsuarios.length; i++){
         if(ListaUsuarios[i].idUsuario === inputUsuario.value){
             if(ListaUsuarios[i].nip === inputNip.value){
-                warningCase("loginWarning",1,0);
-                OpenMenu(ListaUsuarios[i],sectionLogin);
+                warningCase("loginWarning", 1, 0);
+                OpenMenu(ListaUsuarios[i], sectionLogin);
                 return;
             }else{
                 ListaUsuarios[i].fails++;
-                warningCase("loginWarning",1,12);
+                warningCase("loginWarning", 1, 12);
                 if(ListaUsuarios[i].fails >= 3)
                     blocked();
                 return;
             }
         }
     }
-    warningCase("loginWarning",1,11); //el usuario no existe
+    warningCase("loginWarning", 1, 11); //el usuario no existe
+}
+
+function addListenerLocal(elemento, tipo, funcion){
+    elemento.addEventListener(tipo, funcion);
+    ListaListeners.push({ elemento, tipo, funcion });
+}
+  
+function removerListenersLocales(){
+    ListaListeners.forEach(listener => {
+        listener.elemento.removeEventListener(listener.tipo, listener.funcion);
+        ListaListeners.pop(listener);
+    });
 }
 
 function OpenMenu(user, sectionType){  //Solicita el usuario y el login/signup con que inicio
     OpenSection(sectionMenu, sectionType);
-    OpenStatus(user.nombre, user.saldo);
-    OpenMovs(user);
-}
-
-function OpenStatus(nombre){
     const h1Saludo = document.getElementById("saludo");
-    h1Saludo.innerHTML = "Hola de nuevo, " + nombre;
-}
-
-function OpenMovs(user){
+    h1Saludo.innerHTML = "Hola de nuevo, " + user.nombre;
     const sectionSaldo = document.getElementById("consultarSaldo");
     const sectionDepositar = document.getElementById("depositar");
     const sectionRetirar = document.getElementById("retirar");
     const sectionTransacc = document.getElementById("transacc");
-    document.getElementById("btnConsultarSaldo").addEventListener("click", () => {
-        OpenSection(sectionSaldo, sectionMenu);
-        actConsultarSaldo(user, sectionSaldo);
-    });
-    document.getElementById("btnOpenDeposito").addEventListener("click", () => { 
-        OpenSection(sectionDepositar, sectionMenu);
-        actTransacc(user, "depositoform", "submitDeposito", "depoMonto", "depoWarning", 31, sectionDepositar);
-    });
-    document.getElementById("btnOpenRetiro").addEventListener("click", () => { 
-        OpenSection(sectionRetirar, sectionMenu);
-        actTransacc(user, "retiroform", "submitRetiro", "retiroMonto", "retiroWarning", 32, sectionRetirar);
-    });
-    document.getElementById("btnOpenTransacc").addEventListener("click", () => {
-        OpenSection(sectionTransacc, sectionMenu);
-        const ulTransacc = document.getElementById("listTransacc");
-        user.listTransacc.forEach(transacc => {
-            const liTransacc = document.createElement("li");
-            liTransacc.innerHTML = transacc.id + ". | " + transacc.fecha + " | " + transacc.tipo + transacc.monto;
-            ulTransacc.appendChild(liTransacc);
-        });
-        document.getElementById("btnCloseHistorial").addEventListener("click", () => {
-            OpenSection(sectionMenu, sectionTransacc);
-            ulTransacc.textContent = "";
-        });
-    });
-}
-
-
-
-function actConsultarSaldo(user, sectionClose){
-    document.getElementById("btnCloseSaldo").addEventListener("click", () => OpenSection(sectionMenu, sectionClose));
+    const btnOpenSaldo = document.getElementById("btnConsultarSaldo");
+    const btnOpenDeposito = document.getElementById("btnOpenDeposito");
+    const btnOpenRetiro = document.getElementById("btnOpenRetiro");
+    const btnOpenHistorial = document.getElementById("btnOpenTransacc");
+    const btnCloseHistorial = document.getElementById("btnCloseHistorial");
+    const btnCloseSaldo = document.getElementById("btnCloseSaldo");
+    const formDeposito = document.getElementById("depositoform");
+    const formRetiro = document.getElementById("retiroform");
+    const ulTransacc = document.getElementById("listTransacc");
     const pSaldo = document.getElementById("saldo");
-    pSaldo.textContent = "Tu saldo es de: $ " + user.saldo;
+    addListenerLocal(btnOpenDeposito, "click", () => { OpenSection(sectionDepositar, sectionMenu); disabledElementTemp("btnOpenDeposito"); });
+    addListenerLocal(btnOpenRetiro, "click", () => { OpenSection(sectionRetirar, sectionMenu); disabledElementTemp("btnOpenRetiro"); });
+    addListenerLocal(formDeposito, "submit", (e) => actTransacc(e, user, "submitDeposito", "depoMonto", "depoWarning", 31, sectionDepositar));
+    addListenerLocal(formRetiro, "submit", (e) => actTransacc(e, user, "submitRetiro", "retiroMonto", "retiroWarning", 32, sectionRetirar));
+    addListenerLocal(formDeposito, "reset", () => { warningCase("depoWarning", 4, 0); OpenSection(sectionMenu, sectionDepositar); });
+    addListenerLocal(formRetiro, "reset", () => { warningCase("retiroWarning", 4, 0); OpenSection(sectionMenu, sectionRetirar); });
+    addListenerLocal(btnOpenHistorial, "click", () => actHistorialTransacc(user, sectionTransacc));
+    addListenerLocal(btnCloseHistorial, "click", () => { OpenSection(sectionMenu, sectionTransacc); ulTransacc.textContent = ""; });
+    addListenerLocal(btnCloseSaldo, "click", () => OpenSection(sectionMenu, sectionSaldo));
+    addListenerLocal(btnOpenSaldo, "click", () => { OpenSection(sectionSaldo, sectionMenu);
+        pSaldo.textContent = user.nombre + ", Tu saldo es de: $ " + user.saldo;});
+    document.getElementById("btnLogout").addEventListener("click", () => {
+        disabledElementTemp("btnLogout");
+        console.log(ListaListeners.forEach(listener => {listener.elemento + " ";}));
+        removerListenersLocales();
+        OpenSection(sectionLogin, sectionMenu);
+        ListaUsuarios.forEach(user => { user.fails = 0; });
+    });
 }
 
-function actTransacc(user, idMovform, idSubmit, idInput, idWarninglabel, idWarningCase, sectionClose){ //1.Depo 2.Retiro
-    document.getElementById(idMovform).addEventListener("submit", function(e){
-        e.preventDefault();
-        const input1 = document.getElementById(idInput);
-        if(((parseInt(input1.value) + user.saldo) <= 990 ) && (idMovform === "depositoform")){
-            user.deposito(parseInt(input1.value));
-        }else if(((user.saldo - parseInt(input1.value)) >= 10) && (idMovform === "retiroform")){
-            user.retiro(parseInt(input1.value));
-        }else{ warningCase(idWarninglabel, 4, idWarningCase); return; }
-        document.getElementById(idSubmit).disabled = true;
-        setTimeout(() => { document.getElementById(idSubmit).disabled = false}, 2000);
-        input1.value = 0;
-        warningCase(idWarninglabel, 4, 0);
-        OpenSection(sectionMenu, sectionClose);
+function actHistorialTransacc(user, sectionLocal){
+    disabledElementTemp("btnOpenTransacc");
+    OpenSection(sectionLocal, sectionMenu);
+    const ulTransacc = document.getElementById("listTransacc");
+    ulTransacc.textContent = "";
+    user.listTransacc.forEach(transacc => {
+        const liTransacc = document.createElement("li");
+        liTransacc.innerHTML = "De: " + user.nombre + ". " + transacc.id + ". | " + transacc.fecha + " | " + transacc.tipo + transacc.monto;
+        ulTransacc.appendChild(liTransacc);
     });
-    document.getElementById(idMovform).addEventListener("reset", function(e) {
-        e.preventDefault();
-        warningCase(idWarninglabel, 4, 0);
-        OpenSection(sectionMenu, sectionClose);
-    });
+}
+
+function actTransacc(e, user, idSubmit, idInput, idWarninglabel, idWarningCase, sectionLocal){
+    e.preventDefault();
+    const input1 = document.getElementById(idInput);
+    if(((parseInt(input1.value) + user.saldo) <= 990 ) && (idSubmit === "submitDeposito")){
+        user.deposito(parseInt(input1.value)); console.log("Entrada: " + input1.value + " | saldo: " + user.saldo);
+    }else if(((user.saldo - parseInt(input1.value)) >= 10) && (idSubmit === "submitRetiro")){
+        user.retiro(parseInt(input1.value)); console.log("Entrada: " + input1.value + " | saldo: " + user.saldo);
+    }else{ warningCase(idWarninglabel, 4, idWarningCase); console.log("Entrada: " + input1.value + " | saldo: " + user.saldo); return; }
+    disabledElementTemp(idSubmit);
+    input1.value = "";
+    warningCase(idWarninglabel, 4, 0);
+    OpenSection(sectionMenu, sectionLocal);
 }
 
 function OpenSignup(){
@@ -177,22 +168,20 @@ function OpenSignup(){
     inputLast.addEventListener("keyup", () => confirmarNombre(inputLast));
     document.getElementById("signupform").addEventListener("submit", function(e){
         e.preventDefault();
-        if(allgreen([inputUser, inputName, inputLast, inputNipX])){
-            submitSignup = document.getElementById("submitSignup");
-            submitSignup.disabled = true;
-            newUser = new Usuario(inputUser.value, inputName.value, inputLast.value, inputNipX.value);
-            newUser.apertura(100);
-            ListaUsuarios.push(newUser);
-            OpenMenu(ListaUsuarios[ListaUsuarios.length-1],sectionSignup);
-            setTimeout(() => { allImputsClean([inputUser, inputName, inputLast, inputNipX, inputNipZ]); submitSignup.disabled = false },2200);
-        }else{
-            warningCase("signupWarning",4,27);
+        if(!allgreen([inputUser, inputName, inputLast, inputNipX])){
+            warningCase("signupWarning", 4, 27);
+            return;
         }
+        disabledElementTemp("submitSignup");
+        newUser = new Usuario(inputUser.value, inputName.value, inputLast.value, inputNipX.value);
+        newUser.apertura(100);
+        ListaUsuarios.push(newUser);
+        OpenMenu(ListaUsuarios[ListaUsuarios.length - 1], sectionSignup);
+        setTimeout(() => { allImputsClean([inputUser, inputName, inputLast, inputNipX, inputNipZ]) }, 2200);
     });
-    document.getElementById("signupform").addEventListener("reset", function(e){
-        e.preventDefault();
-        warningCase("signupWarning",4,27);
-        OpenSection(sectionLogin,sectionSignup);
+    document.getElementById("signupform").addEventListener("reset", () => {
+        warningCase("signupWarning", 4, 0);
+        OpenSection(sectionLogin, sectionSignup);
     });
 }
 
@@ -200,29 +189,29 @@ function confirmarNombre(input1){
     if(!input1.value || !isNaN(input1.value) || isNumber(input1.value)){
         input1.style.borderColor = "#aa1111";
         !input1.value
-            ? warningCase("signupWarning",4,21)
-            : warningCase("signupWarning",4,23);
+            ? warningCase("signupWarning", 4, 21)
+            : warningCase("signupWarning", 4, 23);
     }else{
         input1.style.borderColor = "#11aa11";
-        warningCase("signupWarning",4,0);
+        warningCase("signupWarning", 4, 0);
     }
 }
 
 function confirmacionUser(input1){
     if(!input1.value || !input1.value.trim()){
         input1.style.borderColor = "#aa1111";
-        warningCase("signupWarning",4,21);
+        warningCase("signupWarning", 4, 21);
         return;
     }
 
     for(let i = 0; i < ListaUsuarios.length; i++){
         if( ListaUsuarios[i].idUsuario === input1.value){
             input1.style.borderColor = "#aa1111";
-            warningCase("signupWarning",4,22); 
+            warningCase("signupWarning", 4, 22); 
             return;
         }else{
             input1.style.borderColor = "#11aa11";
-            warningCase("signupWarning",4,0)
+            warningCase("signupWarning", 4, 0)
         }
     }
 }
@@ -231,13 +220,13 @@ function confirmacionNIP(input1, input2){
     console.log(input1.value + " " + input2.value);
     if(input1.value !== input2.value || input1.value.length < 4 || isNaN(input1.value)){
         input1.style.borderColor = "#aa1111";
-        if(isNaN(input1.value)) { warningCase("signupWarning",4,26); return; }
-        if(input1.value.length < 4) { warningCase("signupWarning",4,25); return; }
+        if(isNaN(input1.value)) { warningCase("signupWarning", 4, 26); return; }
+        if(input1.value.length < 4) { warningCase("signupWarning", 4, 25); return; }
         input2.style.borderColor = "#aa1111";
-        warningCase("signupWarning",4,24);
+        warningCase("signupWarning", 4, 24);
         return;
     }else{
-        warningCase("signupWarning",4,0);
+        warningCase("signupWarning", 4, 0);
         input1.style.borderColor = "#11aa11";
         input2.style.borderColor = "#11aa11";
     }
@@ -250,9 +239,13 @@ function allgreen(inputs){
     return true;
 }
 
-function CloseMenu(){
-    OpenSection(sectionLogin, sectionMenu);
-    ListaUsuarios.forEach(user => { user.fails = 0; })
+function generarUsuarios(){
+    const nombres = ["Horacio", "Marisol", "Marcela","Tacubeño","Hernández", "Camacho"];
+    for(let i = 0; i<3; i++){
+        const newUser = new Usuario("cliente0" + (i + 1),nombres[i], nombres[i + 3], "" + (2050 - i * 25));
+        newUser.apertura(927 - 43 * i);
+        ListaUsuarios.push(newUser);
+    }
 }
 
 function blocked(){
@@ -277,6 +270,12 @@ function OpenSection(sectionOpen, sectionClose){
             requestAnimationFrame(() => { sectionOpen.classList.add("active"); console.log("Open Class of " + sectionOpen.id)})
         }, 0);
     }, { once: true });
+}
+
+function disabledElementTemp(idInput){
+    const input1 = document.getElementById(idInput);
+    input1.disabled = true;
+    setTimeout(() => { input1.disabled = false }, 2000);
 }
 
 function warningCase(idLabel, numSection, error){  // 1.Login 2.Signup 3.Menu 4.Operaciones
