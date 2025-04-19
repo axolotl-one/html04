@@ -55,10 +55,12 @@
             </div>
         </section>
         <section id="consultarSaldo" class="banners">
+            <h3>Panel de Consulta</h3>
             <p id="saldo"></p>
-            <button id="btnCloseSaldo">Volver al Panel</button>
+            <button id="btnCloseSaldo">Volver al Menú</button>
         </section>
         <section id="depositar" class="banners">
+            <h3>Panel de Depósito</h3>
             <form id="depositoform">
                 <input type="number" id="depoMonto" name="deposito" inputmode="numeric" maxlength="3" max="980" min="1" autocomplete="off"
                     placeholder="Ingresa el monto a depositar" title="Deposito mínimo de $ 1 y Máximo de $ 980" required>
@@ -68,6 +70,7 @@
             <label id="depoWarning"></label>
         </section>
         <section id="retirar" class="banners">
+            <h3>Panel de Retiro</h3>
             <form id="retiroform">
                 <input type="number" id="retiroMonto" name="retiro" inputmode="numeric" maxlength="3" max="980" min="1" autocomplete="off"
                     placeholder="Ingresa el monto a retirar" title="Retiro mínimo de $ 1 y Máximo de $ 980" required>
@@ -77,7 +80,10 @@
             <label id="retiroWarning"></label>
         </section>
         <section id="transacc" class="banners">
-            <h1>Historial de transaccciones</h1>
+            <h3>Historial de Transaccciones</h3>
+            <ul id="listTransacc">
+            </ul>
+            <button id="btnCloseHistorial">Volver al Menú</button>
         </section>
         <section id="blocked" class="banners">
             <div></div>
@@ -85,7 +91,7 @@
         </section>
     </main>
     <footer>
-        <h5>B.5 Simulador ATM</h5>
+        <h5>B.6 Simulador ATM</h5>
     </footer>
     <script src="../scripts/campus/project.js"></script>
 </body>

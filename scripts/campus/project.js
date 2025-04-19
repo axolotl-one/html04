@@ -1,21 +1,53 @@
+class Transaccion{
+    constructor(id, tipo, monto)
+    {
+        this.id = id;
+        this.tipo = tipo;
+        this.monto = monto;
+        const ahora = new Date();
+        this.fecha = ahora.toISOString();
+    }
+}
 
 class Usuario{
-    constructor(id, nombre, apellido, nip, apertura)
+    constructor(id, nombre, apellido, nip)
     {
         this.idUsuario = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.nip = nip;
-        this.saldo = apertura;
+        this.saldo = 0;
         this.fails = 0;
+        this.listTransacc = [];
+    }
+    
+    deposito(monto){
+        this.saldo += monto;
+        const transacc = new Transaccion(this.listTransacc.length+1,"Depósito: + $ ", monto);
+        this.listTransacc.unshift(transacc);
+    }
+
+    retiro(monto){
+        this.saldo -= monto;
+        const transacc = new Transaccion(this.listTransacc.length+1, "Retiro: - $ ", monto);
+        this.listTransacc.unshift(transacc);
+    }
+
+    apertura(monto){
+        this.saldo += monto;
+        const transacc = new Transaccion(this.listTransacc.length+1, "Apertura: + $ ", monto);
+        this.listTransacc.unshift(transacc);
     }
 }
 
 
 const ListaUsuarios = [];
-const user01 = new Usuario("cliente01","Horacio","Tacubeño","0456",950);
-const user02 = new Usuario("cliente02","Marisol","Hernandez","1010",800);
-const user03 = new Usuario("cliente03","Marcela","Camacho","2021",790);
+const user01 = new Usuario("cliente01","Horacio","Tacubeño","0456");
+const user02 = new Usuario("cliente02","Marisol","Hernandez","1010");
+const user03 = new Usuario("cliente03","Marcela","Camacho","2021");
+user01.apertura(912);
+user02.apertura(807);
+user03.apertura(789);
 ListaUsuarios.push(user01);
 ListaUsuarios.push(user02);
 ListaUsuarios.push(user03);
@@ -73,7 +105,7 @@ function OpenMovs(user){
     const sectionSaldo = document.getElementById("consultarSaldo");
     const sectionDepositar = document.getElementById("depositar");
     const sectionRetirar = document.getElementById("retirar");
-    // TODO: const sectionTransacc = document.getElementById("transacc");
+    const sectionTransacc = document.getElementById("transacc");
     document.getElementById("btnConsultarSaldo").addEventListener("click", () => {
         OpenSection(sectionSaldo, sectionMenu);
         actConsultarSaldo(user, sectionSaldo);
@@ -85,6 +117,19 @@ function OpenMovs(user){
     document.getElementById("btnOpenRetiro").addEventListener("click", () => { 
         OpenSection(sectionRetirar, sectionMenu);
         actTransacc(user, "retiroform", "submitRetiro", "retiroMonto", "retiroWarning", 32, sectionRetirar);
+    });
+    document.getElementById("btnOpenTransacc").addEventListener("click", () => {
+        OpenSection(sectionTransacc, sectionMenu);
+        const ulTransacc = document.getElementById("listTransacc");
+        user.listTransacc.forEach(transacc => {
+            const liTransacc = document.createElement("li");
+            liTransacc.innerHTML = transacc.id + ". | " + transacc.fecha + " | " + transacc.tipo + transacc.monto;
+            ulTransacc.appendChild(liTransacc);
+        });
+        document.getElementById("btnCloseHistorial").addEventListener("click", () => {
+            OpenSection(sectionMenu, sectionTransacc);
+            ulTransacc.textContent = "";
+        });
     });
 }
 
@@ -101,9 +146,9 @@ function actTransacc(user, idMovform, idSubmit, idInput, idWarninglabel, idWarni
         e.preventDefault();
         const input1 = document.getElementById(idInput);
         if(((parseInt(input1.value) + user.saldo) <= 990 ) && (idMovform === "depositoform")){
-            user.saldo += parseInt(input1.value);
+            user.deposito(parseInt(input1.value));
         }else if(((user.saldo - parseInt(input1.value)) >= 10) && (idMovform === "retiroform")){
-            user.saldo -= parseInt(input1.value);
+            user.retiro(parseInt(input1.value));
         }else{ warningCase(idWarninglabel, 4, idWarningCase); return; }
         document.getElementById(idSubmit).disabled = true;
         setTimeout(() => { document.getElementById(idSubmit).disabled = false}, 2000);
@@ -135,13 +180,19 @@ function OpenSignup(){
         if(allgreen([inputUser, inputName, inputLast, inputNipX])){
             submitSignup = document.getElementById("submitSignup");
             submitSignup.disabled = true;
-            newUser = new Usuario(inputUser.value, inputName.value, inputLast.value, inputNipX.value, 100);
+            newUser = new Usuario(inputUser.value, inputName.value, inputLast.value, inputNipX.value);
+            newUser.apertura(100);
             ListaUsuarios.push(newUser);
             OpenMenu(ListaUsuarios[ListaUsuarios.length-1],sectionSignup);
             setTimeout(() => { allImputsClean([inputUser, inputName, inputLast, inputNipX, inputNipZ]); submitSignup.disabled = false },2200);
         }else{
             warningCase("signupWarning",4,27);
         }
+    });
+    document.getElementById("signupform").addEventListener("reset", function(e){
+        e.preventDefault();
+        warningCase("signupWarning",4,27);
+        OpenSection(sectionLogin,sectionSignup);
     });
 }
 
