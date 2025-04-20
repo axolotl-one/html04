@@ -31,8 +31,9 @@ input, button, select{
     appearance: auto;
 }
 
-input:focus{
+input:focus, button:focus{
     outline: none;
+    background-color: #edf0f7;
 }
 
 form{
@@ -79,7 +80,7 @@ form{
     transition: all 1s ease-in-out;
 }
 
-#signup, #menu, #consultarSaldo, #depositar, #retirar, #transacc{
+#signup, #menu, #panelSaldo, #panelDeposito, #panelRetiro, #panelHistorial{
     display: none;
     flex-direction: column;
     gap: 10px;
@@ -90,7 +91,7 @@ form{
 }
 
 #login.active, #signup.active, #menu.active,
-#consultarSaldo.active, #depositar.active, #retirar.active, #transacc.active{
+#panelSaldo.active, #panelDeposito.active, #panelRetiro.active, #panelHistorial.active{
     opacity: 1;
     transform: translateY(-2vh);
 }

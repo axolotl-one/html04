@@ -19,7 +19,7 @@
                 <input name="login" type="text" id="loginIdUser" placeholder="Ingresa tu nombre de Usuario" required maxlength="20">
                 <input name="login" type="password" id="loginNip" inputmode="numeric" maxlength="8" pattern="\d{4,8}"
                     placeholder="Ingresa tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
-                <input name="login" type="submit" id="btnLogin" value="Iniciar Sesión">
+                <input name="login" type="submit" id="submitLogin" value="Iniciar Sesión">
             </form>
             <p>¿Aún no tienes cuenta?</p>
             <button id="btnOpenSignup">Regístrate</button>
@@ -43,23 +43,22 @@
         <section id="menu">
             <div id="bannerStatus" class="banners">
                 <h1 id="saludo"></h1>
-                <h2 id="novedad"></h2>
             </div>
             <div id="bannerAcciones" class="banners">
-                <button id="btnConsultarSaldo">Consultar Saldo</button>
-                <button id="btnOpenDeposito">Depositar</button>
-                <button id="btnOpenRetiro">Retirar</button>
-                <button id="btnOpenTransacc">Transaccciones</button>
+                <button id="btnOpenPanelSaldo">Consultar Saldo</button>
+                <button id="btnOpenDeposito">Realizar Depósito</button>
+                <button id="btnOpenRetiro">Realizar Retiro</button>
+                <button id="btnOpenHistorial">Historial de Transaccciones</button>
                 <!--TODObutton id="btnOpenShopping">Compras</button-->
                 <button id="btnLogout">Cerrar Sesión</button>
             </div>
         </section>
-        <section id="consultarSaldo" class="banners">
+        <section id="panelSaldo" class="banners">
             <h3>Panel de Consulta</h3>
             <p id="saldo"></p>
             <button id="btnCloseSaldo">Volver al Menú</button>
         </section>
-        <section id="depositar" class="banners">
+        <section id="panelDeposito" class="banners">
             <h3>Panel de Depósito</h3>
             <form id="depositoform">
                 <input type="number" id="depoMonto" name="deposito" inputmode="numeric" maxlength="3" max="980" min="1" autocomplete="off"
@@ -69,7 +68,7 @@
             </form>
             <label id="depoWarning"></label>
         </section>
-        <section id="retirar" class="banners">
+        <section id="panelRetiro" class="banners">
             <h3>Panel de Retiro</h3>
             <form id="retiroform">
                 <input type="number" id="retiroMonto" name="retiro" inputmode="numeric" maxlength="3" max="980" min="1" autocomplete="off"
@@ -79,7 +78,7 @@
             </form>
             <label id="retiroWarning"></label>
         </section>
-        <section id="transacc" class="banners">
+        <section id="panelHistorial" class="banners">
             <h3>Historial de Transaccciones</h3>
             <ul id="listTransacc">
             </ul>
@@ -91,7 +90,7 @@
         </section>
     </main>
     <footer>
-        <h5>B.6 Simulador ATM</h5>
+        <h5>B.8 Simulador ATM</h5>
     </footer>
     <script src="../scripts/campus/project.js"></script>
 </body>
