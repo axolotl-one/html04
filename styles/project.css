@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #115599;
+    font-size: 24px;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #dae2eb;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+input, button, select{
+    padding: 10px;
+    border-radius: 20px;
+    border-style: solid;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: auto;
+}
+
+input:focus, button:focus{
+    outline: none;
+    background-color: #edf0f7;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#logo{
+    background-image: url("../assets/bancoztli/logo.png");
+    background-size: cover;
+    width: 90px;
+    height: 90px;
+    margin: 10px;
+}
+
+#blocked div{
+    background-image: url("../assets/bancoztli/blockedUser.png");
+    background-size: cover;
+    width: 90px;
+    height: 90px;
+}
+
+.banners { /* #login, #signup, #blocked, #bannerStatus, #bannerAcciones{ */
+    display: flex;
+    padding: 5vh 5vw;
+    width: 70vw;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px #222;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #dae2eb;
+}
+
+#blocked{
+    display: none;
+    align-items: center;
+}
+
+#login{  /*Banner origen*/
+    margin-top: 2vh;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+}
+
+#signup, #menu, #panelSaldo, #panelDeposito, #panelRetiro, #panelHistorial{
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    justify-self:center;
+    opacity: 0;
+    margin-top: 2vh;
+    transition: all 1s ease-in-out;
+}
+
+#login.active, #signup.active, #menu.active,
+#panelSaldo.active, #panelDeposito.active, #panelRetiro.active, #panelHistorial.active{
+    opacity: 1;
+    transform: translateY(-2vh);
+}
+
+footer{
+    width: 100%;
+    position: fixed;
+    bottom: 2vh;
+}
+
+footer h5{
+    position: static;
+    text-align: center;
+    color: #dae2eb;
+}
+
+@media screen and (min-width: 600px){
+    #login, #signup, #blocked{
+        width: 48%;
+        height: auto;
+        padding: 25px;
+    }
+
+    #menu{
+        width: auto;
+        height: auto;
+        padding: 0;
+    }
+}

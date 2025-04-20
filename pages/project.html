@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/project.css">
+    <title>Banco</title>
+</head>
+<body>
+    <header>
+        <div id="logo"></div>
+        <h1>Bancoztli</h1>
+    </header>
+
+    <main>
+        <section id="login" class="banners">
+            <form id="loginform">
+                <label> Inicia sesión</label>
+                <input name="login" type="text" id="loginIdUser" placeholder="Ingresa tu nombre de Usuario" required maxlength="20">
+                <input name="login" type="password" id="loginNip" inputmode="numeric" maxlength="8" pattern="\d{4,8}"
+                    placeholder="Ingresa tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
+                <input name="login" type="submit" id="submitLogin" value="Iniciar Sesión">
+            </form>
+            <p>¿Aún no tienes cuenta?</p>
+            <button id="btnOpenSignup">Regístrate</button>
+            <label id="loginWarning"></label>
+        </section>
+        <section id="signup" class="banners">
+            <form id="signupform">
+                <label>Registrate</label>
+                <input type="text" id="signupUser" name="signup" placeholder="Ingresa tu Nombre de Usuario" required maxlength="20">
+                <input type="text" id="signupNombre" name="signup" placeholder="Ingresa tu Nombre" required maxlength="30">
+                <input type="text" id="signupApellido" name="signup" placeholder="Ingresa tu Apellido" required maxlength="30">
+                <input type="password" id="signupNIPX" name="signup" inputmode="numeric" maxlength="8" pattern="\d{4,8}" 
+                    placeholder="Ingresa tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
+                <input type="password" id="signupNIPY" name="signup" inputmode="numeric" maxlength="8" pattern="\d{4,8}"
+                    placeholder="Confirma tu NIP" title="El NIP debe contener entre 4 y 8 números" required>
+                    <input type="reset" id="resetSignup" name="signup" value="Cancelar Registro">
+                    <input type="submit" id="submitSignup" name="signup" value="Regístrarse">
+            </form>
+            <label id="signupWarning"></label>
+        </section>
+        <section id="menu">
+            <div id="bannerStatus" class="banners">
+                <h1 id="saludo"></h1>
+            </div>
+            <div id="bannerAcciones" class="banners">
+                <button id="btnOpenPanelSaldo">Consultar Saldo</button>
+                <button id="btnOpenDeposito">Realizar Depósito</button>
+                <button id="btnOpenRetiro">Realizar Retiro</button>
+                <button id="btnOpenHistorial">Historial de Transaccciones</button>
+                <!--TODObutton id="btnOpenShopping">Compras</button-->
+                <button id="btnLogout">Cerrar Sesión</button>
+            </div>
+        </section>
+        <section id="panelSaldo" class="banners">
+            <h3>Panel de Consulta</h3>
+            <p id="saldo"></p>
+            <button id="btnCloseSaldo">Volver al Menú</button>
+        </section>
+        <section id="panelDeposito" class="banners">
+            <h3>Panel de Depósito</h3>
+            <form id="depositoform">
+                <input type="number" id="depoMonto" name="deposito" inputmode="numeric" maxlength="3" max="980" min="1" autocomplete="off"
+                    placeholder="Ingresa el monto a depositar" title="Deposito mínimo de $ 1 y Máximo de $ 980" required>
+                <input type="reset" id="resetDeposito" name="deposito" value="Cancelar Depósito">
+                <input type="submit" id="submitDeposito" name="deposito" value="Realizar Depósito">
+            </form>
+            <label id="depoWarning"></label>
+        </section>
+        <section id="panelRetiro" class="banners">
+            <h3>Panel de Retiro</h3>
+            <form id="retiroform">
+                <input type="number" id="retiroMonto" name="retiro" inputmode="numeric" maxlength="3" max="980" min="1" autocomplete="off"
+                    placeholder="Ingresa el monto a retirar" title="Retiro mínimo de $ 1 y Máximo de $ 980" required>
+                <input type="reset" id="resetRetiro" name="retiro" value="Cancelar Retiro">
+                <input type="submit" id="submitRetiro" name="retiro" value="Realizar Retiro">
+            </form>
+            <label id="retiroWarning"></label>
+        </section>
+        <section id="panelHistorial" class="banners">
+            <h3>Historial de Transaccciones</h3>
+            <ul id="listTransacc">
+            </ul>
+            <button id="btnCloseHistorial">Volver al Menú</button>
+        </section>
+        <section id="blocked" class="banners">
+            <div></div>
+            <h1>Se ha bloqueado al usuario por exceso de intentos</h1>
+        </section>
+    </main>
+    <footer>
+        <h5>B.8 Simulador ATM</h5>
+    </footer>
+    <script src="../scripts/campus/project.js"></script>
+</body>
+</html>
