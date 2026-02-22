@@ -49,9 +49,10 @@ const sectionMenu = document.getElementById("menu");
 
 requestAnimationFrame(() => { sectionLogin.classList.add("active"); })
 
+document.addEventListener("DOMContentLoaded", function(){ generarUsuarios();})
+
 document.getElementById("loginform").addEventListener("submit", function(e){
     e.preventDefault();
-    generarUsuarios();
     ValidateLogin();
 });
 
@@ -64,6 +65,8 @@ function ValidateLogin(){
         if(ListaUsuarios[i].idUsuario === inputUsuario.value){
             if(ListaUsuarios[i].nip === inputNip.value){
                 OpenMenu(ListaUsuarios[i], sectionLogin, "submitLogin");
+                inputUsuario.value = "";
+                inputNip.value = "";
                 warningCase("loginWarning");
                 return;
             }else{
@@ -195,20 +198,19 @@ function confirmarNombre(input1){
 function confirmacionUser(input1){
     if(!input1.value || !input1.value.trim()){
         input1.style.borderColor = "#aa1111";
-        warningCase("signupWarning", "Completa el campo marcado");
+        warningCase("signupWarning", "Completa el campo para Nombre de Usuario");
         return;
     }
 
     for(let i = 0; i < ListaUsuarios.length; i++){
         if( ListaUsuarios[i].idUsuario === input1.value){
             input1.style.borderColor = "#aa1111";
-            warningCase("signupWarning", "El Usuario ya existe"); 
+            warningCase("signupWarning", "El Nombre de Usuario ya ha sido ocupado"); 
             return;
-        }else{
-            input1.style.borderColor = "#11aa11";
-            warningCase("signupWarning")
         }
     }
+    input1.style.borderColor = "#11aa11";
+    warningCase("signupWarning")
 }
 
 function confirmacionNIP(input1, input2){

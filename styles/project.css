@@ -9,6 +9,7 @@ body {
 }
 
 header{
+    padding: 10px 0px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,7 +44,7 @@ form{
 }
 
 #logo{
-    background-image: url("../assets/bancoztli/logo.png");
+    background-image: url("../assets/banxolotl/banxolotl-logo.png");
     background-size: cover;
     width: 90px;
     height: 90px;
@@ -51,7 +52,7 @@ form{
 }
 
 #blocked div{
-    background-image: url("../assets/bancoztli/blockedUser.png");
+    background-image: url("../assets/banxolotl/blockedUser.png");
     background-size: cover;
     width: 90px;
     height: 90px;
@@ -100,12 +101,13 @@ footer{
     width: 100%;
     position: fixed;
     bottom: 2vh;
+    color: #dae2eb;
+    font-size: 15px;
 }
 
-footer h5{
+footer details{
     position: static;
     text-align: center;
-    color: #dae2eb;
 }
 
 @media screen and (min-width: 600px){

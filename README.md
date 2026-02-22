@@ -156,3 +156,7 @@ Se renombraron los id de las secciones de operaciones a _panel_ junto con la ope
 2. Implementar nuevas operaciones como la operación de transferencia, la operación de inversión/suscripción, la operación de +puntos recompensas y la operación de pago en linea.
 3. Implementar @media-queries para interfaces desktop, recordando que este proyecto aplica el enfoque mobile-first. Posible cambio de flex a grid sobre los paneles para desktops.
 
+### 10.1 Implementación de una Web App para iOS y Android y Corrección de Bugs
+
+Se implementaron las etiquetas meta para habilitar el proyecto como Web App para iOS y Android y se incluyó un icono para la Web App. Para ello, se asocia un archivo JSON "manifest" donde se incluye el título y la imagen para la Web App que aplica para ambos Sistemas Operativos. Adicional se incluyo otra etiqueta meta para dispostivos iOS que no sean compatibles.
+Se cambió el nombre del proyecto de Bancoztli a Banxolotl y se corrigieron bugs relacionados con la carga de datos al iniciar la página web con el nuevo listener _"DOMContentLoaded"._ Se corrigió el bug ocurrido al validar el usuario para registrarlo y validar que no existe el usuario al tener precargada la lista de los usuarios con el listener mencionado anteriormente. También se agregaron las instrucciones para limpiar el formulario del login una vez iniciada la sesión. Los mensajes de advertencia de los formularios son más claros en el contexto.
