@@ -3,31 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./pages/main/style-basic.css">
+    <link rel="stylesheet" href="./pages/main/style-index.css">
     <title>Modulo 3 | Intro a JavaScript</title>
 </head>
 <body>
-    <header>
-        <h1>MENU PRINCIPAL DEL MODULO 3 (Intro a JavaScript)</h1>
-        <div class="enlaces">
-            <h2>Prácticas de Campus</h2>
-            <a href="./pages/pract01.html">Tipos de Datos</a>
-            <a href="./pages/pract02.html">Estructuras Selectivas: <i>if-else</i></a>
-            <a href="./pages/pract03.html">Estructuras Iterativas: <i>frutas</i></a>
-            <a href="./pages/pract04.html">Arreglos: <i>Colección de libros</i></a>
-            <a href="./pages/pract05.html">Objetos: <i>Colección de libros</i></a>
-            <a href="./pages/pract06.html">DOM: <i>Caja de Comentarios</i></a>
-            <a href="./pages/pract07.html">DOM: <i>Generador de Passwords</i></a>
-        </div>
-        <div class="enlaces">
-            <h2>Prácticas de Clase</h2>
-            <a href="./pages/tarea01.html">Vacunación</a>
-            <a href="./pages/tarea02.html">Piedra, Papel o Tijeras Menos Una</a>
-            <a href="./pages/project.html">Cajero ATM</a>
-        </div>
-    </header>
-    <footer>
-        <h5>V2.8 Proyecto de Campus: Cajero</h5>
-    </footer>
+    <nav>
+        <header>
+            <h1>MENU PRINCIPAL DEL MODULO 3 (Intro a JavaScript)</h1>
+        </header>
+        <main>
+            <div class="enlaces">
+                <h2>Prácticas de Campus</h2>
+                <a href="./pages/product01/tipos-de-datos.html">Tipos de Datos</a>
+                <a href="./pages/product02/estructuras-seleccion.html">Estructuras Selectivas: <i>if-else</i></a>
+                <a href="./pages/product03/arreglo-frutas.html">Estructuras Iterativas: <i>frutas</i></a>
+                <a href="./pages/product04/array-libros.html">Arreglos: <i>Colección de libros</i></a>
+                <a href="./pages/product05/object-libro.html">Objetos: <i>Colección de libros</i></a>
+                <a href="./pages/product06/mixtapetube.html">DOM: <i>Caja de Comentarios</i></a>
+                <a href="./pages/product07/generador-passwords.html">DOM: <i>Generador de Passwords</i></a>
+            </div>
+            <div class="enlaces">
+                <h2>Prácticas de Clase</h2>
+                <a href="./pages/task01/registro-vacunacion.html">Vacunación</a>
+                <a href="./pages/task02/piedra-papel-tijera-1.html">Piedra, Papel o Tijeras Menos Una</a>
+                <a href="./banxolotl/v1/index.html">Cajero ATM</a>
+            </div>
+        </main>
+        <footer>
+            <details>
+                <summary><h5 id="legend-version"></h5></summary>
+                <pre id="info-version"></pre>
+                <pre>&copy; 2026. Axel López (axolotl-one)</pre>
+            </details>
+        </footer>
+    </nav>
+    <script src="./pages/main/version.js"></script>
 </body>
 </html>

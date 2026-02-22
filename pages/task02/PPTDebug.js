@@ -48,7 +48,7 @@ document.getElementById("activarMenos1").addEventListener("click", ()=> MenosUna
 
 function AgregarMano(tiro){
     const imagen = document.createElement("img");
-    imagen.src = "../assets/manos/" + tiro + ".png";
+    imagen.src = "./assets/" + tiro + ".png";
     imagen.alt = tiro;
     const contenedor1 = document.getElementById("mano1Jugador1");
     const contenedor2 = document.getElementById("mano2Jugador1");
@@ -163,7 +163,7 @@ function Seleccion(numero, esJugador1, esMano1){
     const imagen = document.createElement("img");
     let contenedor; 
     if(numero%3 === 0){
-        imagen.src = "../assets/manos/rock.png";
+        imagen.src = "./assets/rock.png";
         imagen.alt = "rock";
         if(esJugador1 === true){
             if(esMano1 === true){
@@ -179,7 +179,7 @@ function Seleccion(numero, esJugador1, esMano1){
             }
         }
     }else if(numero%3 === 1){
-        imagen.src = "../assets/manos/paper.png";
+        imagen.src = "./assets/paper.png";
         imagen.alt = "paper";
         if(esJugador1 === true){
             if(esMano1 === true){
@@ -195,7 +195,7 @@ function Seleccion(numero, esJugador1, esMano1){
             }
         }
     }else{
-        imagen.src = "../assets/manos/scissors.png";
+        imagen.src = "./assets/scissors.png";
         imagen.alt = "scissors";
         if(esJugador1 === true){
             if(esMano1 === true){

@@ -7,7 +7,7 @@
   "theme_color": "#115599",
   "icons": [
     {
-      "src": "./banxolotl-icon-android.png",
+      "src": "../assets/logo-web-app.png",
       "sizes": "512x512",
       "type": "image/png"
     }

@@ -16,23 +16,23 @@ function AgregarLibro()
     contenedorHijo.className = "libroCapturado"
     librosRegistrados.push(titulo);
     if(genero === "science"){
-        imagen.src = "../assets/libros/physics.png";
+        imagen.src = "./assets/physics.png";
     }else if(genero === "fiction"){
-        imagen.src = "../assets/libros/fiction.png";
+        imagen.src = "./assets/fiction.png";
     }else if(genero === "law"){
-        imagen.src = "../assets/libros/law.png";
+        imagen.src = "./assets/law.png";
     }else if(genero === "didactic"){
-        imagen.src = "../assets/libros/didactic.png";
+        imagen.src = "./assets/didactic.png";
     }else if(genero === "fairytale"){
-        imagen.src = "../assets/libros/fairytale.png";
+        imagen.src = "./assets/fairytale.png";
     }else if(genero === "code"){
-        imagen.src = "../assets/libros/code.png";
+        imagen.src = "./assets/code.png";
     }else if(genero === "maths"){
-        imagen.src = "../assets/libros/maths.png";
+        imagen.src = "./assets/maths.png";
     }else if(genero === "romance"){
-        imagen.src = "../assets/libros/romance.png";
+        imagen.src = "./assets/romance.png";
     }else{
-        imagen.src = "../assets/libros/generic.png";
+        imagen.src = "./assets/generic.png";
     }
     contenedorHijo.append(imagen);
     contenedorHijo.append(etiqueta);

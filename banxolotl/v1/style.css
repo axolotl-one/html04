@@ -44,7 +44,7 @@ form{
 }
 
 #logo{
-    background-image: url("../assets/banxolotl/banxolotl-logo.png");
+    background-image: url("../assets/logo-main.png");
     background-size: cover;
     width: 90px;
     height: 90px;
@@ -52,7 +52,7 @@ form{
 }
 
 #blocked div{
-    background-image: url("../assets/banxolotl/blockedUser.png");
+    background-image: url("../assets/blocked-user.png");
     background-size: cover;
     width: 90px;
     height: 90px;

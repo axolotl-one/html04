@@ -13,3 +13,18 @@ input, select{
     -moz-appearance: none; /* Nativo de Firefox kick */
     appearance: none;
 }
+
+nav {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+    padding: 5px 10px;
+}
+
+summary *{
+    display: inline;
+}
+
+footer *{
+    text-align: center;
+}
