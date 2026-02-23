@@ -166,3 +166,7 @@ Se cambió el nombre del proyecto de Bancoztli a Banxolotl y se corrigieron bugs
 ### (24) V3.0.0 Refactorización de Archivos del Repositorio
 
 Se renombraron y reordenaron los archivos del repositorio por carpetas correspondientes a cada producto realizado (html, js, css e imagenes si es el caso), eliminando por completo la categoría anterior de "pages", "styles" y "scripts". "Banxolotl" fue agregado como producto final independiente del resto de productos y se corrigió el error de la ruta al solicitar la Web-App.
+
+### (25) V3.1.0 Refactorización sobre los productos 1, 2 y 3
+
+Restructura de estilos, maquetados y código fuente para mejor legibilidad y diseño intuitivo. Se remplazó la captura y entrada de datos con windows.prompt() por formularios con entrada por inputs. Se remplazó la salida de datos con la función alert() por la creación y manipulación de componentes "pre" y componentes con la clase "vista-text". Se implementó un menú de controles con comportamiento _sticky_ que permanece fijo en la parte inferior mientras se navegue por el contenido principal del _main,_ útil para dispositivos móviles y evita ocultar la información del footer al llegar a ese apartado durante la navegación.

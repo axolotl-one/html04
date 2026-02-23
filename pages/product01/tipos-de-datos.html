@@ -7,8 +7,23 @@
     <title>Tipos de Datos</title>
 </head>
 <body>
-    <h1 id="tema"></h1>
-    <p id="captura"></p>
+    <nav>
+        <header>
+            <h1 id="tema"></h1>
+        </header>
+        <main id="main">
+            <form id="form" class="mono-inputs">
+                <input id="inputInt" type="number" inputmode="numeric" required placeholder="Ingresa un valor entero" autocomplete="off">
+                <input id="inputFloat" type="text" inputmode="numeric" required placeholder="Ingresa un valor decimal" autocomplete="off">
+                <input id="inputString" type="text" required placeholder="Ingresa algún texto">
+                <input type="submit">
+            </form>
+        </main>
+        <footer>
+            <details id="info-version"></details>
+        </footer>
+    </nav>
+    <script src="../main/version.js"></script>
     <script src="./tipos-de-datos.js"></script>
 </body>
 </html>

@@ -1,32 +1,79 @@
-header, main, footer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 5vh;
-}
-
-main div img{
+main section img{
+    display: inline;
     width: 40vw;
-    height: 40wv;
+    height: 40vw;
 }
 
-button{
-    padding: 15px;
-    border-radius: 20px;
-    font-size: 25px;
-    color: #eeeeee;
-    border-color: #eeeeee;
-    background-color: #222222;
+.vista-text {
+    display: none;
+    padding: 10px;
     font-weight: bold;
+    background-color: #222222DD;
+    border: 2px groove #eee;
+    border-radius: 15px;
+    max-height: 80dvh;
+    overflow: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
 }
 
-@media screen and (min-width: 550px){
-    main div img{
-        width: 250px;
-        height: 250px;
+.vista-text *{
+    text-align: left; /* Alinea a la derecha el botón hijo*/
+}
+
+.vista-text-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vista-text-nav button {
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+#controles {   
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 1dvh;
+    font-size: 0;
+}
+
+#controles input {
+    min-width: 90dvw;
+}
+
+#controles button {
+    min-width: 45dvw;
+}
+
+
+@media screen and (min-width: 612px){
+    main section img{
+        max-width: 245px;
+        max-height: 245px;
+    }
+}
+
+@media screen and (min-width: 1230px){
+    #controles{
+        margin: 25px 0;
     }
 
-    header, main, footer{
-        margin: 2vh 0px;
+    #controles div{
+        display: inline;
+    }
+
+    #controles button{
+        display: inline-block;
+        min-width: auto;
+    }
+    
+    #controles input {
+        display: inline-block;
+        min-width: 45dvw;
     }
 }
