@@ -52,18 +52,22 @@ a, button, input, select{
     transition: all 0.5s ease;
 }
 
+input[type="checkbox"]{ 
+    appearance: auto; /* Restablece el estilo original */
+}
+
 a:hover, button:hover {
     background-color: #333333;
 }
 
 /* Formularios */
 
-.mono-inputs input {
+.mono-inputs input, .mono-inputs select {
     min-width: 90dvw;
 }
 
 @media screen and (min-width: 612px){
-    .mono-inputs input {
+    .mono-inputs input, .mono-inputs select {
         min-width: auto;
     }
 }

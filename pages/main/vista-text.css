@@ -1,0 +1,90 @@
+.vista-text {
+    display: none;
+    padding: 10px;
+    font-weight: bold;
+    background-color: #222222DD;
+    border: 2px groove #eee;
+    border-radius: 15px;
+    max-height: 80dvh;
+    overflow: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+}
+
+.vista-text *{
+    text-align: left; /* Alinea a la derecha el botón hijo*/
+}
+
+.vista-text-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vista-text-nav button {
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+.sub-form{
+    display: none;
+}
+
+.controles {   
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 1dvh;
+    font-size: 0;
+}
+
+.controles input, .controles select {
+    min-width: 90dvw;
+}
+
+.controles input[type="checkbox"]{ 
+    appearance: auto; /* Restablece el estilo original */
+}
+
+.controles button {
+    min-width: 45dvw;
+}
+
+.pseudo-main {
+    display: block;
+    min-height: 80%;
+}
+
+
+@media screen and (min-width: 612px){
+    main section img{
+        max-width: 245px;
+        max-height: 245px;
+    }
+}
+
+@media screen and (min-width: 1230px){
+    .controles{
+        margin: 25px 0;
+    }
+
+    .controles div{
+        display: inline;
+    }
+
+    .controles .sub-form{
+        display: none;
+    }
+
+    .controles button{
+        display: inline-block;
+        min-width: auto;
+    }
+    
+    .controles input {
+        display: inline-block;
+        min-width: 45dvw;
+    }
+}

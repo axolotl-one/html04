@@ -1,0 +1,320 @@
+[
+    {
+        "estado":"AGUASCALIENTES",
+        "clave":"AS",
+        "municipios": [
+            {"municipio":"AGUASCALIENTES", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"BAJA CALIFORNIA",
+        "clave":"BC",
+        "municipios":
+        [
+            {"municipío":"ENSENADA", "zona-libre-norte":true},
+            {"municipio":"MEXICALI", "zona-libre-norte":true},
+            {"municipio":"PLAYAS DE ROSARITO", "zona-libre-norte":true},
+            {"municipio":"TECATE", "zona-libre-norte":true},
+            {"municipio":"TIJUANA", "zona-libre-norte":true}
+        ]
+    },
+    {
+        "estado":"BAJA CALIFORNIA SUR",
+        "clave":"BS",
+        "municipios":[
+            {"municipio":"LA PAZ", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"CAMPECHE",
+        "clave":"CC",
+        "municipios":[
+            {"municipio":"CAMPECHE", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"CHIAPAS",
+        "clave":"CS",
+        "municipios":[
+            {"municipio":"TUXTLA GUTIÉRREZ", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"CHIHUAHUA",
+        "clave":"CH",
+        "municipios":
+        [
+            {"municipio":"CHIHUAHUA", "zona-libre-norte":false},
+            {"municipio":"JANOS", "zona-libre-norte":true},
+            {"municipio":"ASCENSIÓN", "zona-libre-norte":true},
+            {"municipio":"JUÁREZ", "zona-libre-norte":true},
+            {"municipio":"CIUDAD JUÁREZ", "zona-libre-norte":true},
+            {"municipio":"GUADALUPE", "zona-libre-norte":true},
+            {"municipio":"PRÁXEDIS G. GUERRERO", "zona-libre-norte":true},
+            {"municipio":"OJINAGA", "zona-libre-norte":true},
+            {"municipio":"MANUEL BENAVIDES", "zona-libre-norte":true}
+        ]
+    },
+    {
+        "estado":"CIUDAD DE MEXICO",
+        "clave":"DF",
+        "municipios":
+        [
+            {"municipio":"ÁLVARO OBREGON", "zona-libre-norte":false},
+            {"municipio":"MIGUEL HIDALGO", "zona-libre-norte":false},
+            {"municipio":"GUSTAVO A. MADERO", "zona-libre-norte":false},
+            {"municipio":"AZCAPOTZALCO", "zona-libre-norte":false},
+            {"municipio":"BENITO JUÁREZ", "zona-libre-norte":false},
+            {"municipio":"COYOACAN", "zona-libre-norte":false},
+            {"municipio":"VENUSTIANO CARRANZA", "zona-libre-norte":false},
+            {"municipio":"CUAUHTÉMOC", "zona-libre-norte":false},
+            {"municipio":"MAGDALENA CONTRERAS", "zona-libre-norte":false},
+            {"municipio":"CUAJIMALPA", "zona-libre-norte":false},
+            {"municipio":"MILPA ALTA", "zona-libre-norte":false},
+            {"municipio":"TLALPAN", "zona-libre-norte":false},
+            {"municipio":"XOCHIMILCO", "zona-libre-norte":false},
+            {"municipio":"TLAHUAC", "zona-libre-norte":false},
+            {"municipio":"IZTACALCO", "zona-libre-norte":false},
+            {"municipio":"IZTAPALAPA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"COAHUILA",
+        "clave":"CL",
+        "municipios":
+        [
+            {"municipio":"SALTILLO", "zona-libre-norte":false},
+            {"municipio":"OCAMPO", "zona-libre-norte":true},
+            {"municipio":"ACUÑA", "zona-libre-norte":true},
+            {"municipio":"JIMÉNEZ", "zona-libre-norte":true},
+            {"municipio":"PIEDRAS NEGRAS", "zona-libre-norte":true},
+            {"municipio":"GUERRERO", "zona-libre-norte":true},
+            {"municipio":"HIDALGO", "zona-libre-norte":true}
+        ]      
+    },
+    {
+        "estado":"COLIMA",
+        "clave":"CM",
+        "municipios":[
+            {"municipio":"COLIMA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"DURANGO",
+        "clave":"DG",
+        "municipios":[
+            {"municipio":"DURANGO", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"ESTADO DE MEXICO",
+        "clave":"MC",
+        "municipios":[
+            {"municipio":"TOLUCA", "zona-libre-norte":false},
+            {"municipio":"TIANGUISTENCO", "zona-libre-norte":false},
+            {"municipio":"TLANEPANTLA", "zona-libre-norte":false},
+            {"municipio":"NAUCALPAN", "zona-libre-norte":false},
+            {"municipio":"CHICONCUAC", "zona-libre-norte":false},
+            {"municipio":"TEXCOCO", "zona-libre-norte":false},
+            {"municipio":"ECATEPEC", "zona-libre-norte":false},
+            {"municipio":"CHIMALHUACÁN", "zona-libre-norte":false},
+            {"municipio":"TEOTIHUACÁN", "zona-libre-norte":false},
+            {"municipio":"TULTEPEC", "zona-libre-norte":false},
+            {"municipio":"IXTAPALUCA", "zona-libre-norte":false},
+            {"municipio":"CHALCO", "zona-libre-norte":false},
+            {"municipio":"VALLE DE CHALCO", "zona-libre-norte":false},
+            {"municipio":"AMECAMECA", "zona-libre-norte":false},
+            {"municipio":"NEZAYORK", "zona-libre-norte":false},
+            {"municipio":"NEZAHUALCÓYOTL", "zona-libre-norte":false},
+            {"municipio":"COCOTITLÁN", "zona-libre-norte":false},
+            {"municipio":"LOS REYES", "zona-libre-norte":false},
+            {"municipio":"LA PAZ", "zona-libre-norte":false},
+            {"municipio":"TEMAMATLA", "zona-libre-norte":false},
+            {"municipio":"TLAMANALCO", "zona-libre-norte":false},
+            {"municipio":"JUCHITEPEC", "zona-libre-norte":false},
+            {"municipio":"EL ORO", "zona-libre-norte":false},
+            {"municipio":"LÓPEZ MATEOS", "zona-libre-norte":false},
+            {"municipio":"CIUDAD LÓPEZ MATEOS", "zona-libre-norte":false},
+            {"municipio":"METEPEC", "zona-libre-norte":false},
+            {"municipio":"TECAMAC", "zona-libre-norte":false},
+            {"municipio":"ZINACANTEPEC", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"GUANAJUATO",
+        "clave":"GT",
+        "municipios":[
+            {"municipio":"GUANAJUATO", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"GUERRERO",
+        "clave":"GR",
+        "municipios":[
+            {"municipio":"CHILPANCINGO", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"HIDALGO",
+        "clave":"HG",
+        "municipios":[
+            {"municipio":"PACHUCA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"JALISCO",
+        "clave":"JC",
+        "municipios":[
+            {"municipio":"GUADALAJARA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"MICHOACAN",
+        "clave":"MN",
+        "municipios":[
+            {"municipio":"MORELIA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"MORELOS",
+        "clave":"MS",
+        "municipios":[
+            {"municipio":"CUERNAVACA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"NAYARIT",
+        "clave":"NT",
+        "municipios":[
+            {"municipio":"TEPIC", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"NUEVO LEON",
+        "clave":"NL",
+        "municipios":
+        [
+            {"municipio":"MONTERREY", "zona-libre-norte":false},
+            {"municipio":"ANÁHUAC", "zona-libre-norte":true}
+        ]
+
+    },
+    {
+        "estado":"OAXACA",
+        "clave":"OC",
+        "municipios":[
+            {"municipio":"OAXACA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"PUEBLA",
+        "clave":"PL",
+        "municipios":[
+            {"municipio":"PUEBLA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"QUERETARO",
+        "clave":"QT",
+        "municipios":[
+            {"municipio":"QUERETARO", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"QUINTANA ROO",
+        "clave":"QR",
+        "municipios":[
+            {"municipio":"CHETUMAL", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"SAN LUIS POTOSI",
+        "clave":"SP",
+        "municipios":[
+            {"municipio":"SAN LUIS POTOSÍ", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"SINALOA",
+        "clave":"SL",
+        "municipios":[
+            {"municipio":"CULIACÁN", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"SONORA",
+        "clave":"SR",
+        "municipios":
+        [
+            {"municipio":"HERMOSILLO", "zona-libre-norte":false},
+            {"municipio":"SAN LUIS RIO COLORADO", "zona-libre-norte":true},
+            {"municipio":"PUERTO PEÑASCO", "zona-libre-norte":true},
+            {"municipio":"GENERAL PLUTARCO ELÍAS CALLES", "zona-libre-norte":true},
+            {"municipio":"CABORCA", "zona-libre-norte":true},
+            {"municipio":"ALTAR", "zona-libre-norte":true},
+            {"municipio":"SÁRIC", "zona-libre-norte":true},
+            {"municipio":"NOGALES", "zona-libre-norte":true},
+            {"municipio":"SANTA CRUZ", "zona-libre-norte":true},
+            {"municipio":"CANANEA", "zona-libre-norte":true},
+            {"municipio":"NACO", "zona-libre-norte":true},
+            {"municipio":"AGUA PRIETA", "zona-libre-norte":true}
+        ]
+    },
+    {
+        "estado":"TABASCO",
+        "clave":"TC",
+        "municipios":[
+            {"municipio":"VILLAHERMOSA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"TAMAULIPAS",
+        "clave":"TS",
+        "municipios":
+        [
+            {"municipio":"CIUDAD VICTORIA", "zona-libre-norte":false},
+            {"municipio":"NUEVO LAREDO", "zona-libre-norte":true},
+            {"municipio":"GUERRERO", "zona-libre-norte":true},
+            {"municipio":"MIER", "zona-libre-norte":true},
+            {"municipio":"MIGUEL ALEMÁN", "zona-libre-norte":true},
+            {"municipio":"CAMARGO", "zona-libre-norte":true},
+            {"municipio":"GUSTAVO DÍAZ ORDAZ", "zona-libre-norte":true},
+            {"municipio":"REYNOSA", "zona-libre-norte":true},
+            {"municipio":"RÍO BRAVO", "zona-libre-norte":true},
+            {"municipio":"VALLE HERMOSO", "zona-libre-norte":true},
+            {"municipio":"MATAMOROS", "zona-libre-norte":true}
+        ]         
+    },
+    {
+        "estado":"TLAXCALA",
+        "clave":"TL",
+        "municipios":[
+            {"municipio":"TLAXCALA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"VERACRUZ",
+        "clave":"VZ",
+        "municipios":[
+            {"municipio":"XALAPA", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"YUCATAN",
+        "clave":"YN",
+        "municipios":[
+            {"municipio":"MÉRIDA", "zona-libre-norte":false} 
+        ]
+    },
+    {
+        "estado":"ZACATECAS",
+        "clave":"ZS",
+        "municipios":[
+            {"municipio":"ZACATECAS", "zona-libre-norte":false}
+        ]
+    },
+    {
+        "estado":"EXTRANJERO",
+        "clave":"NE"
+    }
+]

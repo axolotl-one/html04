@@ -170,3 +170,9 @@ Se renombraron y reordenaron los archivos del repositorio por carpetas correspon
 ### (25) V3.1.0 Refactorización sobre los productos 1, 2 y 3
 
 Restructura de estilos, maquetados y código fuente para mejor legibilidad y diseño intuitivo. Se remplazó la captura y entrada de datos con windows.prompt() por formularios con entrada por inputs. Se remplazó la salida de datos con la función alert() por la creación y manipulación de componentes "pre" y componentes con la clase "vista-text". Se implementó un menú de controles con comportamiento _sticky_ que permanece fijo en la parte inferior mientras se navegue por el contenido principal del _main,_ útil para dispositivos móviles y evita ocultar la información del footer al llegar a ese apartado durante la navegación.
+
+### (26) V3.2.0 Refactorización sobre el producto task 01
+
+Restructura de estilos, maquetados y código fuente cambiado a js-module para mejor legibilidad y diseño intuitivo. Se remplazó la captura y entrada de datos con windows.prompt() por formularios con entrada por inputs y selects. Se remplazó la salida de datos con la función alert() por la creación y manejo del DOM para componentes "pre" y componentes con la clase "vista-text". Se implementó un menú de controles con comportamiento _sticky_ que permanece fijo en la parte inferior mientras se navegue por el contenido principal del _main,_ útil para dispositivos móviles y evita ocultar la información del footer al llegar a ese apartado durante la navegación.
+
+Se implementó un archivo _json_ que contiene información sobre los estados de las entidades federativas, sobre el que se permite dar lectura e identificar la localidad seleccionada, como también poder realizar un esquema sobre el usuario como una de las próximas mejoras.
