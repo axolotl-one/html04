@@ -5,37 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../main/vista-text.css">
     <link rel="stylesheet" href="../main/style-basic.css">
-    <title>Vacunación</title>
+    <link rel="icon" href="./webicon.png">
+    <title>Portal de Vacunación</title>
 </head>
 <body>
     <nav>
         <header><h1>Producto T01: Simulador del Portal de Vacunación Covid-19</h1></header>
         <main>
-            <section class="pseudo-main">
+            <section class="contenido-main">
                 <details>
                     <summary><h3>Requisitos de Vacunación</h3></summary>
                     <p>Mexicanos que cumplan 30 años o más en este año.</p>
+                    <p>Mexicanos que cumplan 18 años o más en este año y que residan en alguna Capital Estatal.</p>
                     <p>Mexicanos que cumplan 18 años o más en este año y que residan en la Zona Libre de la Frontera Norte.</p>
-                    <p>Mexicanos que cumplan 18 años o más en este año y que residan en la Zonas Metropolitanas.</p>
+                    <p>Mexicanos que cumplan 18 años o más en este año y que residan en la Zona Metropolitana del Valle de México.</p>
                     <p>Mexicanos que cumplan 12 años o más en este año y que residan en los estados de Baja California y Sonora.</p>
                     <p>Mexicanas que se encuentren en al menos nueve semanas en periodo de gestación.</p>
                 </details>
                 <div id="curp-error"></div>
-                <div id="sub-form-error"></div>
             </section>
             <section class="controles">
                 <form id="form" class="mono-inputs">
                     <input type="text" id="input-curp" required placeholder="Ingresa tu CURP" maxlength="18" minlength="18">
                     <label class="sub-form" id="lbl-gestacion"><input type="checkbox" id="checkbox-gestacion"> Me encuentro en estado de gestación</label>
-                    <select class="sub-form" id="select-edo"><option value=""> -- Selecciona un Estado -- </option></select>
+                    <select class="sub-form" id="select-edo"><option value="" id="op-edo-null"> -- Selecciona un Estado -- </option></select>
                     <input class="sub-form" type="text" id="input-municipio" value="NO APLICA" required maxlength="30"
                         placeholder="Ingresa el municipio donde recides" autocomplete="address-line1">
-                    <input type="submit">
+                    <input type="submit" value="Solicitar Vacuna">
                 </form>
             </section>
             <section id="vista-estado-vacunacion" class="vista-text">
-                <div class="vista-text-nav"><span>Estado de Vacunación:</span><button id="btn-vista-fuera">x</button></div>
+                <div class="vista-text-nav"><span>Respuesta de Solicitud:</span><button id="btn-vista-fuera-01">x</button></div>
                 <div id="vista-estado-vacunacion-msj"></div>
+                <div><button id="btn-data-curp">Obtener datos recopilados</button></div>
+            </section>
+            <section id="vista-data-curp" class="vista-text">
+                <div class="vista-text-nav"><span>Datos Recopilados:</span><button id="btn-vista-fuera-02">x</button></div>
+                <div id="vista-data-curp-msj"></div>
             </section>
         </main>
         <footer>

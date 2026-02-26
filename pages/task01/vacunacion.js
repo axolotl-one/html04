@@ -5,16 +5,16 @@ const inputCurp = document.getElementById("input-curp");
 const lblgest = document.getElementById("lbl-gestacion");
 const claveCurp = ["a","v","a","a","n","n","b","n","t","n","s","e","f","c","c","c","x","n"]
 const curpError = document.getElementById("curp-error");
-const subformError = document.getElementById("sub-form-error");
 cargarSelectEDO();
 
 document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault();  // Validación de la solicitud
     const msj = document.getElementById("vista-estado-vacunacion-msj")
-    document.getElementById("vista-estado-vacunacion").style.display = "block"
+    document.getElementById("vista-estado-vacunacion").style.display = "block";
+    if(inputCurp.value.length !== 18) { console.log(inputCurp.value.length); msj.innerHTML = "<p>CURP no válida.</p><p>La CURP debe contener 18 caracteres."; return }
     if(curpError.innerHTML !== "") { msj.innerHTML = "<p>CURP no válida.</p><p>Por favor, revisa los parámetros solicitados.</p>"; return }
-    if(subformError.innerHTML !== "") { msj.innerHTML = "<p>Se requiere completar algunos datos adicionales.</p>"; return}
-    //const nacimiento = inputCurp.value.substring(4,9)
+    if(!selectEDO.value) { msj.innerHTML = "<p>Se requiere el Estado de residencia para continuar.</p>"; selectEDO.focus(); return }
+    //if(subformError.innerHTML !== "") { msj.innerHTML = "<p>Se requiere completar algunos datos adicionales.</p>"; return }
     const ok = "<p>Tu solicitud ha sido aceptada.</p><p>Se te asignó la vacuna ";
     const edad = calcularEdad();
     if(edad>=70) { msj.innerHTML = ok + "PATRIA</p>"; return}
@@ -49,18 +49,15 @@ inputCurp.addEventListener("keyup", () => { //Validación curp
 })
 
 selectEDO.addEventListener("change", () => {
-    if(!selectEDO.value){ subformError.innerHTML += "Por favor, selecciona una Entidad Federativa.";
-        inputMunp.style.display = "none"; inputMunp.value = "NO APLICA"; return }
-    subformError.innerHTML = "";
+    if(document.getElementById("op-edo-null")) { document.getElementById("op-edo-null").remove() }
     inputMunp.value = "";
     inputMunp.style.display = "inline-block";
 })
 
 inputMunp.addEventListener("keyup", e => e.target.value = e.target.value.toUpperCase())
 
-document.getElementById("btn-vista-fuera").addEventListener("click", () => {
-    document.getElementById("vista-estado-vacunacion").style.display = "none";
-})
+document.getElementById("btn-vista-fuera-01").addEventListener("click", () => { document.getElementById("vista-estado-vacunacion").style.display = "none"; })
+document.getElementById("btn-vista-fuera-02").addEventListener("click", () => { document.getElementById("vista-data-curp").style.display = "none"; })
 
 function esCaracterValido(tipo, char) {
     if(tipo === "a" || tipo === "e" || tipo === "f") // Alfabeto
@@ -121,10 +118,23 @@ async function cargarSelectEDO() {
     await entidades.forEach((edo) => {
         if(edo.clave==="NE") return;
         const op = document.createElement("option");
-        op.value = edo.clave; op.textContent = edo.estado
+        op.value = edo.clave; op.textContent = edo.estado;
         selectEDO.append(op);
     })
 }
 
+document.getElementById("btn-data-curp").addEventListener("click", () => {
+    const curp = inputCurp.value
+    const nacimiento = [curp[4]+curp[5], curp[6]+curp[7], curp[8]+curp[9]];
+    const esSigloXXI = isNaN(curp[16]);
+    const meses = ["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];
+    const msjDataCurp = document.getElementById("vista-data-curp-msj");
+    msjDataCurp.innerHTML = 
+        "<p>FECHA DE NACIMIENTO:</p>" +
+        "<p>" + nacimiento[2] + " DE " + (parseInt(nacimiento[1]) <= 12 ? meses[parseInt(nacimiento[1]-1)] : "QUIENSABE CUANDO") + 
+            " DE " +  (esSigloXXI ? "20" : "19") + nacimiento[0] + "</p>" +
+        "<p>GÉNERO: " + (curp[10] === "H" ? "HOMBRE" : "MUJER");
+    document.getElementById("vista-data-curp").style.display = "block";
+})
+
 //TODO: Mejorar funcionalidad con el sub-form
-//TODO: Agregar función de datos recopilados

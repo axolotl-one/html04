@@ -176,3 +176,11 @@ Restructura de estilos, maquetados y código fuente para mejor legibilidad y dis
 Restructura de estilos, maquetados y código fuente cambiado a js-module para mejor legibilidad y diseño intuitivo. Se remplazó la captura y entrada de datos con windows.prompt() por formularios con entrada por inputs y selects. Se remplazó la salida de datos con la función alert() por la creación y manejo del DOM para componentes "pre" y componentes con la clase "vista-text". Se implementó un menú de controles con comportamiento _sticky_ que permanece fijo en la parte inferior mientras se navegue por el contenido principal del _main,_ útil para dispositivos móviles y evita ocultar la información del footer al llegar a ese apartado durante la navegación.
 
 Se implementó un archivo _json_ que contiene información sobre los estados de las entidades federativas, sobre el que se permite dar lectura e identificar la localidad seleccionada, como también poder realizar un esquema sobre el usuario como una de las próximas mejoras.
+
+### (27) V3.2.1 Corrección de Bugs sobre el producto task 01
+
+En la corrección de la sobreposición de la sección de controles fijado en la parte inferior, se cambió el display del contenedor padre _main_ para permitir que la sección hija destinada para el contenido del main pueda arrastrar la sección de los controles a la posición esperada utilizando la propiedad _margin-bottom: auto;_
+
+En la corrección de la visualización del texto label se sobreescribió la propiedad _font-size: 0;_ que fue ocupada para eliminar el espacio entre componentes inline-block. Además, para el input type checkbox se sobrescribió el valor de la propiedad _min-weight_ de _90dvw_ a _min-content_ para evitar exceder el tamaño del label padre.
+
+Se implemento una lectura rápida de la curp para mostrar los datos básicos contenidos en su codificación

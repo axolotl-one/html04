@@ -33,28 +33,39 @@
     display: none;
 }
 
-.controles {   
-    position: -webkit-sticky;
-    position: sticky;
-    bottom: 1dvh;
-    font-size: 0;
+main {
+    display: flex;  
+    flex-direction: column;
+    /* Fija adecuamente .controles al fondo cuando .contenido-main no llena el area visible */
 }
 
-.controles input, .controles select {
+.controles {   
+    position: -webkit-sticky;
+    position: sticky;  
+    bottom: 1dvh;
+    font-size: 0;
+    /* Fija .controles al fondo mientras se navegue sobre el main */
+}
+
+.controles input, .controles select .controles label{
     min-width: 90dvw;
 }
 
-.controles input[type="checkbox"]{ 
-    appearance: auto; /* Restablece el estilo original */
+.controles label input[type="checkbox"] {
+    min-width: min-content;
+}
+
+
+.controles label{
+    font-size: 20px;
 }
 
 .controles button {
     min-width: 45dvw;
 }
 
-.pseudo-main {
-    display: block;
-    min-height: 80%;
+.contenido-main {
+    margin-bottom: auto;
 }
 
 

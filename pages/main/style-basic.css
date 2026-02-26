@@ -39,7 +39,7 @@ input, select{
     appearance: none;
 }
 
-a, button, input, select{
+a, button, input, select, label{
     display: inline-block;
     padding: 15px;
     font-size: 20px;
@@ -62,8 +62,12 @@ a:hover, button:hover {
 
 /* Formularios */
 
-.mono-inputs input, .mono-inputs select {
+.mono-inputs input, .mono-inputs select, .mono-inputs label{
     min-width: 90dvw;
+}
+
+.mono-inputs input[type="checkbox"]{ 
+    min-width: min-content; /* Restablece el estilo original */
 }
 
 @media screen and (min-width: 612px){
