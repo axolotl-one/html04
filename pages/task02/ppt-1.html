@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../main/style-basic.css">
+    <link rel="stylesheet" href="../main/vista-text.css">
+    <link rel="stylesheet" href="./ppt-1.css">
+    <title>Piedra Papel o Tijeras Menos Una</title>
+</head>
+<body>
+<nav>
+<header>
+    <h1>Piedra Papel o Tijeras menos una</h1>
+</header>
+<main>
+    <section class="contenido-main">
+        <section id="izq">
+            <h3>Jugador 1</h3>
+            <div id="puntosJugador1"></div>
+            <div id="mano1Jugador1" class="manosLanzadas"></div>
+            <div id="mano2Jugador1" class="manosLanzadas"></div>
+        </section>
+        <section id="der">
+            <h3>Jugador 2</h3>
+            <div id="puntosJugador2"></div>
+            <div id="mano1Jugador2" class="manosLanzadas"></div>
+            <div id="mano2Jugador2" class="manosLanzadas"></div>
+        </section>
+    </section>
+    <section class="controles">
+        <span id="elementsUser">
+            <button id="activarPiedra"></button>
+            <button id="activarPapel"></button>
+            <button id="activarTijeras"></button>
+        </span>
+        <span id="elementsComputer">
+            <button id="activarJuego">Iniciart</button>
+            <button id="activarMenos1">Menos Una</button>
+        </span>
+    </section>
+    <section class="config-web">
+        <input type="checkbox" id="input-config-web">
+        <label for="input-config-web" id="lb-config-web"><img src="./assets/settings.png" id="img-config-web" alt="Config"></label>
+        <ul id="listaConfig">
+            <li><label for="modePlayer">Modo de Jugador:</label></li>
+            <li><label for="modeUser"><input type="radio" name="modePlayer" id="modeUser" value="user" checked>Jugador contra Computadora</label></li>
+            <li><label for="modeComputer"><input type="radio" name="modePlayer" id="modeComputer" value="computer">Computadora contra Computadora</label></li>
+            <li><label for="skillLevel">Nivel de Habilidad:</label></li>
+            <li><label for="modeNormal"><input type="radio" name="skillLevel" id="modeNormal" value="normal" checked>Normal</label></li>
+            <li><label for="modeBrutal"><input type="radio" name="skillLevel" id="modeBrutal" value="brutal">Brutal</label></li>
+            <li><label for="modeGame">Modo de Juego:</label></li>
+            <li><label for="modeFriendly"><input type="radio" name="modeGame" id="modeFriendly" value="amistoso" checked>Amistoso</label></li>
+            <li><label for="modeHardcore"><input type="radio" name="modeGame" id="modeHardcore" value="hardcore">Hardcore</label></li>
+            <li><label for="statusMenos1Before"><input type="radio" id="statusMenos1Before" disabled></label></li>
+        </ul>
+    </section>
+    <section class="vista-text" id="vista-winner">
+        <div class="vista-text-nav"><span id="vista-winner-msj"></span><button id="btn-vista-fuera-01">x</button></div>
+        <div id="vista-winner-msj-info"><span class="fig0"></span><span class="fig3"></span><span class="fig4"></span></div>
+    </section>
+</main>
+<footer>
+    <details id="info-version"></details>
+</footer>
+</nav>
+<script src="../main/version.js"></script>
+<script src="./ppt-1.js"></script>
+</body>
+</html>
