@@ -35,6 +35,7 @@
 
 .config-web li label {
     display: block;
+    font-size: 15px;
     padding: 10px 15px;
     color: darkorange;
 }
@@ -62,11 +63,11 @@
     font-size: 20px;
 }
 
-#elementsComputer{
+#controles-computer {
     display: none;
 }
 
-#elementsUser button{
+#controles-user button, .icon-oalt{
     width: 30vw;
     height: 30vw;
     min-width: min-content;
@@ -85,20 +86,6 @@
 
 #activarTijeras{
     background-image: url("./assets/scissors.png");
-}
-
-#mensaje{
-    display: none;
-    width: 250px;
-    height: 100px;
-    background-color: #333333DD;
-    position: fixed;
-    left: calc(50%-100px);
-    text-align: center;
-    vertical-align: middle;
-    font-size: 28px;
-    font-weight: bold;
-    z-index: 10;
 }
 
 .contenido-main {
@@ -133,28 +120,15 @@ input, label {
     justify-content: space-evenly;
 }
 
-/* Círculo: Cuadrado + border-radius 50% */
-.fig0 {
-    width: 50px;
-    height: 50px;
-    background-color: deeppink;
-    border-radius: 50%;
+.icon-oalt {
+    width: 120px;
+    height: 40px;
+    background-image: url("./assets/oalt.png");
 }
 
-/* Triángulo: Borde inferior coloreado y bordes laterales transparentes */
-.fig3 {
-    width: 0;
-    height: 0;
-    border-left: 30px solid transparent;
-    border-right: 30px solid transparent;
-    border-bottom: 50px solid deeppink;
-}
-
-/* Cuadrado: Mismo ancho y alto */
-.fig4 {
-    width: 50px;
-    height: 50px;
-    background-color: deeppink;
+#vista-winner-msj {
+    padding: 10px 0;
+    text-align: center;
 }
 
 @media screen and (min-width: 720px) {
@@ -183,8 +157,14 @@ input, label {
         bottom: 0;
     }
 
-    #elementsUser button {
+    #controles-user button {
         width: 180px;
         height: 180px;
+    }
+
+    .icon-oalt {
+        width: 180px;
+        height: 60px;
+        background-image: url("./assets/oalt.png");
     }
 }

@@ -1,161 +1,99 @@
 const radioUser = document.getElementById("modeUser");
 const radioComputer = document.getElementById("modeComputer");
 const radioStatusMenos1 = document.getElementById("statusMenos1Before");
-const divUser = document.getElementById("elementsUser");
-const divComputer = document.getElementById("elementsComputer");
+const controlsUser = document.getElementById("controles-user");
+const controlsComputer = document.getElementById("controles-computer");
+const puntajes = [0,0,0,0];
 
-radioUser.addEventListener("change", ()=>{
-    if (radioUser.checked) {
-        divUser.style.display = "inline";
-        divComputer.style.display = "none";
-        console.log("Cambio a User");
-    }
-    console.log(radioUser.checked);
-});
-
-radioComputer.addEventListener("change", ()=> {
-    if (radioComputer.checked) {
-        divComputer.style.display = "inline";
-        divUser.style.display = "none";
-        console.log("Cambio a Computer cx");
-    }
-    console.log(radioUser.checked);
-});
+radioUser.addEventListener("change", () => { changeControls(radioUser, controlsComputer, controlsUser) } );
+radioComputer.addEventListener("change", () => { changeControls(radioComputer, controlsUser, controlsComputer) } );
 
 //TODO Crear habilitado para skillLevel brutal, prototipo principal: funtion ComputerChooseBrutal(playerHandQuit)
 //TODO Crear habilitado para modeGame hardcore, prototipo principal: funtion ProbabilityKill();
 
 //Player vs Computer Active
-
-document.getElementById("activarPiedra").addEventListener("click", ()=>AgregarMano("rock"));
-
-document.getElementById("activarPapel").addEventListener("click", ()=>AgregarMano("paper"));
-
-document.getElementById("activarTijeras").addEventListener("click", ()=>AgregarMano("scissors"));
-
-document.getElementById("mano1Jugador1").addEventListener("click", ()=>MenosUna(1));
-
-document.getElementById("mano2Jugador1").addEventListener("click", ()=>MenosUna(2));
+document.getElementById("activarPiedra").addEventListener("click", () => AgregarMano("rock"));
+document.getElementById("activarPapel").addEventListener("click", () => AgregarMano("paper"));
+document.getElementById("activarTijeras").addEventListener("click", () => AgregarMano("scissors"));
+document.getElementById("mano1Jugador1").addEventListener("click", () => MenosUnaJvC(true));
+document.getElementById("mano2Jugador1").addEventListener("click", () => MenosUnaJvC(false));
 
 //Computer vs Computer Active
-
-document.getElementById("activarJuego").addEventListener("click", function () {
-    ComputerChooseNormal(true);
-    ComputerChooseNormal(false);
-});
-
-document.getElementById("activarMenos1").addEventListener("click", ()=> MenosUna(3))
+document.getElementById("activarJuego").addEventListener("click", function () { ComputerChooseNormal(true); ComputerChooseNormal(false);});
+document.getElementById("activarMenos1").addEventListener("click", ()=> {
+    EvaluarResultado(ManoMenos((Math.floor(Math.random() * 3)%2) === 0, true), ManoMenos((Math.ceil(Math.random() * 21)%2) === 0, false))
+    NuevaPartida();});
 
 function AgregarMano(tiro){
     const imagen = document.createElement("img");
-    imagen.src = "./assets/" + tiro + ".png";
-    imagen.alt = tiro;
-    const contenedor1 = document.getElementById("mano1Jugador1");
-    const contenedor2 = document.getElementById("mano2Jugador1");
-    if(contenedor1.innerHTML === ""){
-        contenedor1.appendChild(imagen);
-    }else if(contenedor2.innerHTML === ""){
-        contenedor2.appendChild(imagen);
-        ComputerChooseNormal(false);
-    }
+    imagen.src = "./assets/" + tiro + ".png"; imagen.alt = tiro;
+    if(document.getElementById("mano1Jugador1").innerHTML === "") { document.getElementById("mano1Jugador1").appendChild(imagen); return; }
+    if(document.getElementById("mano2Jugador1").innerHTML === "") { document.getElementById("mano2Jugador1").appendChild(imagen); 
+        ComputerChooseNormal(false); }
 }
 
-function ComputerChooseNormal(esJugador1){
-    const random1 = Math.floor(Math.random() * 3);
-    Seleccion(random1,esJugador1,true);
-    const ahora = new Date;
-    if(ahora.getSeconds()%2 === 0){
-        Seleccion((random1 + 1), esJugador1, false);
-    }else{
-        Seleccion((random1 - 1), esJugador1, false);
-    }
+function ComputerChooseNormal(esJ1){
+    const random = Math.floor(Math.random() * 3);
+    Seleccion(random, esJ1, true);
+    const ahora = new Date
+    ahora.getSeconds() % 2 === 0
+        ? Seleccion((random + 1) % 3, esJ1, false)
+        : Seleccion((random - 1) % 3, esJ1, false)
 }
 
-
-function MenosUna(manoJugador1){
-    let tirosCompletos = true;
-    const divsManosLanzadas = document.querySelectorAll(".manosLanzadas")
-    divsManosLanzadas.forEach(caso => {
-        if(caso.innerHTML === ""){
-            tirosCompletos = false;
-            return; //Solo cierra la funcion anonima interna
-        }
-    });
-
-    if(tirosCompletos === true){
-        let mano1P1Quit;
-        let mano1P2Quit = MenosUnaLocal((Math.floor(Math.random() * 3)%2 + 1), 2);
-        if( manoJugador1 === 3)
-            mano1P1Quit = MenosUnaLocal((Math.floor(Math.random() * 21)%2 + 1), 1);
-        else
-            mano1P1Quit = MenosUnaLocal(manoJugador1, 1);
-        //Trabajar con la mano NO quitada (!mano1PQuit)
-        if(!mano1P1Quit === true){
-            const divMano1Player1 = document.getElementById("mano1Jugador1");
-            imagenContenida1 = divMano1Player1.querySelector("img");
-        }else{
-            const divMano2Player1 = document.getElementById("mano2Jugador1");
-            imagenContenida1 = divMano2Player1.querySelector("img");
-        }
-        if(!mano1P2Quit === true){
-            const divMano1Player2 = document.getElementById("mano1Jugador2");
-            imagenContenida2 = divMano1Player2.querySelector("img");
-        }else{
-            const divMano1Player2 = document.getElementById("mano2Jugador2");
-            imagenContenida2 = divMano1Player2.querySelector("img");
-        }
-        EvaluarResultado(imagenContenida1.alt, imagenContenida2.alt);
-        setTimeout(() => {
-            console.log("Tres segundos después...");       
-            NuevaPartida();
-            // Aquí continúa el resto del código
-          }, 3000);
-    }else{
-        console.log("faltan elementos")
-    }
+function MenosUnaJvC(esM1){
+    const manosLanzadas = document.querySelectorAll(".manosLanzadas"); // Devuelve un NodeList
+    // console.log(manosLanzadas); console.log(Array.from(manosLanzadas));
+    const tirosCompletos = Array.from(manosLanzadas).every(mano => mano.innerHTML.trim() !== "");
+    if(!tirosCompletos) { console.log("Faltan manos en la partida"); return }
+    EvaluarResultado(ManoMenos(esM1, true), ManoMenos((Math.floor(Math.random() * 3)%2) === 0, false));
+    NuevaPartida();
 }
 
-function MenosUnaLocal(mano, jugador){  //Retorna mano quitada, true si es la 1, false si es la 2
-    let contenedor;
-    let esMano1 = true;
-    if(mano == 1){
-        contenedor = document.getElementById("mano" + mano +"Jugador" + jugador);
-    }else if(mano == 2){
-        contenedor = document.getElementById("mano" + mano + "Jugador" + jugador);
-        esMano1 = false;
-    }else{
-        console.log("mano:" + mano);
-        console.log("jUGADOR" + jugador);
-        return;
-    }
-    contenedor.innerHTML = "";
-    return esMano1;
+function ManoMenos(esM1, esJ1){
+    document.getElementById("mano" + (esM1 ? 1 : 2) + "Jugador" + (esJ1 ? 1 : 2)).innerHTML = "";
+    console.log("return" + document.getElementById("mano" + (esM1 ? 2 : 1) + "Jugador" + (esJ1 ? 1 : 2)).querySelector("img").alt)
+    return document.getElementById("mano" + (esM1 ? 2 : 1) + "Jugador" + (esJ1 ? 1 : 2)).querySelector("img").alt;
 }
 
 /* TODO Probar cambiando el div mensaje por un parrafo interno */
 function EvaluarResultado(manoFinalP1,manoFinalP2){
     document.getElementById("vista-winner").style.display = "block";
-    const divMensaje = document.getElementById("vista-winner-msj");
+    const vistaWinner = document.getElementById("vista-winner-msj");
+    const vistaScore = document.getElementById("tr-puntajes"); vistaScore.innerHTML = "";
+    const partidas = document.createElement("td"); partidas.innerHTML = "" + ++puntajes[0];
+    const victJ1 = document.createElement("td"); victJ1.innerHTML = "" + puntajes[1];
+    const victJ2 = document.createElement("td"); victJ2.innerHTML = "" + puntajes[2];
+    const empates = document.createElement("td"); empates.innerHTML = "" + puntajes[3];
     console.log(manoFinalP1 + " VS " + manoFinalP2);
     if(manoFinalP1 === manoFinalP2){
         console.log("Empate ");
-        divMensaje.innerHTML = "EMPATE";
+        vistaWinner.innerHTML = "EMPATE";
+        empates.innerHTML = "" + ++puntajes[3];
     }else if((manoFinalP1 === "rock" && manoFinalP2 === "scissors") || (manoFinalP1 === "paper" && manoFinalP2 === "rock") || (manoFinalP1 === "scissors" && manoFinalP2 === "paper")){
         console.log("Jugador 1 Gana ");
-        divMensaje.innerHTML = "El Jugador 001 gana esta ronda";
+        vistaWinner.innerHTML = "El Jugador 001 gana esta ronda";
+        victJ1.innerHTML = "" + ++puntajes[1];
     }else if((manoFinalP1 === "rock" && manoFinalP2 === "paper") || (manoFinalP1 === "paper" && manoFinalP2 === "scissors") || (manoFinalP1 === "scissors" && manoFinalP2 === "rock")){
         console.log("Jugador 2 Gana ");
-        divMensaje.innerHTML = "La Computadora gana esta ronda";
+        vistaWinner.innerHTML = "La Computadora gana esta ronda";
+        victJ2.innerHTML = "" + ++puntajes[2];
     }
+    vistaScore.append(partidas);
+    vistaScore.append(victJ1);
+    vistaScore.append(victJ2);
+    vistaScore.append(empates);
 }
 
 function NuevaPartida(){
-    const divsManosLanzadas = document.querySelectorAll(".manosLanzadas");
-    document.getElementById("vista-winner-msj").innerHTML = "";
-    document.getElementById("vista-winner").style.display = "none";
-    divsManosLanzadas.forEach(caso => {
-        caso.innerHTML = "";
-    });
+    setTimeout(() => {
+        console.log("Tres segundos después...");
+        const divsManosLanzadas = document.querySelectorAll(".manosLanzadas");
+        document.getElementById("vista-winner-msj").innerHTML = "";
+        document.getElementById("vista-winner").style.display = "none";
+        divsManosLanzadas.forEach(caso => { caso.innerHTML = ""; });
+    }, 3000);
+
 }
 
 function Seleccion(numero, esJugador1, esMano1){
@@ -212,4 +150,12 @@ function Seleccion(numero, esJugador1, esMano1){
     }
     contenedor.innerHTML = "";
     contenedor.appendChild(imagen);
+}
+
+function changeControls(radio, onControls, nextControls){
+    if (radio.checked) {
+        onControls.style.display = "none";
+        nextControls.style.display = "inline";
+        console.log("Cambio de Controles");
+    }
 }
